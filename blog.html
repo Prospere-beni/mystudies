@@ -1,71 +1,13 @@
-
-
-
-<?php
-    
-    include_once('dbconnexion.php');
-
-    
-    
-    if(isset($_POST['submit_1'])){
-    $lastname= $_POST['lastname'];
-    $firstname= htmlspecialchars($_POST["firstname"]);
-    $school_class= htmlspecialchars($_POST["school_class"]);
-    $email=htmlspecialchars($_POST["email"]); 
-    $phone= htmlspecialchars( $_POST["phone"]);
-    $order_id= $_POST["order_id"];
-    $about= $_POST["about"];
-    $message= $_POST["message"];
-
-    //echo $lastname;
-    //echo $firstname;
-    //echo $school_class;
-    //echo $email;
-    //echo $phone;
-    //echo $order_id;
-    //echo $about;
-    //echo $message;
-
-
-    //On insère les données reçues si les champs sont remplis
-    if(!empty($lastname)  && !empty($firstname) && !empty($school_class) && !empty($email)  && !empty($phone) && !empty($order_id) && !empty($about) && !empty($message)){
-                 
-                $sth = $dbco->prepare("
-                    INSERT INTO membres(lastname , firstname , school_class , email , phone , order_id , about , message)
-                    VALUES(:lastname, :firstname, :school_class, :email, :phone, :order_id, :about,:message)");
-
-                    $sth->bindValue(':lastname', $lastname);
-                    $sth->bindValue(':firstname', $firstname);
-                    $sth->bindValue(':school_class', $school_class);
-                    $sth->bindValue(':email',  $email);
-                    $sth->bindValue(':phone', $phone);
-                    $sth->bindValue(':order_id', $order_id);
-                    $sth->bindValue(':about',  $about);
-                    $sth->bindValue(':message',  $message);
-                    $exec  =  $sth->execute();
-                    
-                      //On renvoie l'utilisateur vers la page de remerciement
-                      header("Location:index.html");
-                    
-            }
-
-}
-
-
-   
-    
-?>
-
-
 <!doctype html>
 
 <html lang="fr">
+
+
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 <link rel="dns-prefetch" href="index.html">
 <link rel="dns-prefetch" href="http://www.googletagmanager.com/">
 <link rel="dns-prefetch" href="http://cdnjs.cloudflare.com/">
-<link rel="dns-prefetch" href="http://www.google.com/">
 <link rel="dns-prefetch" href="http://www.facebook.com/">
 <link rel="dns-prefetch" href="http://www.instagram.com/">
 <link rel="dns-prefetch" href="http://twitter.com/">
@@ -77,10 +19,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD">
 
-    <title>Contactez-nous ! - MyStudies.com</title>
-<meta name="description" content="Notre &eacute;quipe se tient &agrave; votre disposition pour vous assister ou vous informer. Remplissez le formulaire de contact.">
-<meta name="keywords" content="contact">
-<link rel="canonical" href="contact.html"/>
+    <title>Le blog - MyStudies.com</title>
+<meta name="description" content="D&eacute;couvrez tous nos articles sur la r&eacute;daction et la correction de documents scolaires et professionnels !">
+<meta name="keywords" content="blog,  articles">
+<link rel="canonical" href="blog.html"/>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
@@ -241,11 +183,11 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                                            <a class="navbar-brand d-none d-sm-block logo-large" href="index.html"><img src="imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a>
-                         <a class="navbar-brand d-block d-sm-none logo-large" href="index.html"><img src="imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a>
+                    <a class="navbar-brand d-none d-sm-block logo-large" href="index.html"><img src="imgs/logo_2.PNG" class="mr-0 pr-0 logo " alt=""></a>
+                    <a class="navbar-brand d-block d-sm-none logo-large" href="index.html"><img src="imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a>
                     
-                    <div class="d-none d-sm-block"> <a class="navbar-brand logo-min" href="index.html"><img src="imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a> </div>
-                     <div class="d-block d-sm-none"> <a class="navbar-brand logo-min" href="index.html"><img src="imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a> </div>
+                    <div class="d-none d-sm-block"> <a class="navbar-brand logo-min" href="index.html"><img src="imgs/logo_2.PNG" class="mr-0 pr-0 logo " alt=""></a> </div>
+                    <div class="d-block d-sm-none"> <a class="navbar-brand logo-min" href="index.html"><img src="imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a> </div>
 
                     <div class="ml-0 ml-xl-4 mr-3 collapse navbar-collapse justify-content-start" id="navbarNavAltMarkup">
 
@@ -256,6 +198,7 @@
                             <a title="Place de marché de documents scolaires" class="all-transition marketplace-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link " href="place-de-marche.html"> Achat/Vente de documents </a>
                             <a title="Cours en ligne" href="cours-en-ligne.html" class="all-transition course-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link ">Cours particuliers en ligne </a>
                         </div>
+
                     </div>
 
                 </nav>
@@ -267,18 +210,25 @@
                             <img src="imgs/flag_fr.png" style="margin-top: -4px;" class="ml-2 icon-top-header" alt="">
                             <a href="#" id="language" data-toggle="dropdown" class="all-transition font-size-medium font-weight-bold ml-1 dropdown-toggle" aria-haspopup="true" aria-expanded="false"> </a>
                             <div class="dropdown-menu" aria-labelledby="language">
-                                <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+                            <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
                                     <input name="language_id" type="hidden" value="1"> 
+                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
+                                            <button class="all-transition disabled  dropdown-item active"><img src="imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
 
-                                    <div data-toggle="popover" data-placement="top" data-content="Under development">
-                                    <button class="all-transition disabled  dropdown-item active"><img src="imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
+                                    
                                     </form>
 
                                     <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
                                     <input name="language_id" type="hidden" value="2"> 
+
+
                                             <div data-toggle="popover" data-placement="top" data-content="Under development">
                                             <button class="all-transition disabled  dropdown-item "><img src="imgs/flag_en.png" class="mr-1 mb-1" alt=""> Anglais</button> </div>
+
+                                    
                                     </form>
+
+                                
                             </div>
                         </div>
                     </div>
@@ -315,121 +265,195 @@
             </div>
 </header>
 
+
     <div class="container-fluid bg-contact pb-3">
+
         <div class="container pt-3">
+
             <div class="content-main-title pb-2">
+
                 <div class="d-flex flex-column align-items-center">
+
                     <div class="text-center w-100">
-                        <h3 class="text-color-blue text-center mt-0 mb-0 nunito font-weight-bolder font-size-xxlarge">Contactez-nous </h3>
-                        <span class="font-size-normal text-dark font-size-large"> Notre équipe se tient à votre disposition pour vous assister ou vous informer.  </span>
+
+                        <h1 class="text-color-blue text-center mt-0 mb-0 nunito font-weight-bolder font-size-xxlarge">Le blog de Mystudies.com</h1>
+                        <h2 class="font-size-medium text-dark mt-3"> Découvrez tous nos articles sur la rédaction et la correction de documents scolaires et professionnels.  </h2>
+
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="card mt-3">
-                        <div class="card-body pt-0">
-                            <div class="row">
-                                <div class="col-lg-12 px-4 pb-3 pt-2">
-                                    <div class="d-flex flex-column mt-3 pt-2 align-items-center">
-                                        <img src="imgs/icon-mail.png" class="pt-1" alt="">
-                                        <h3 class="text-center font-weight-bolder mt-2 pt-1 pb-0 mb-0 font-size-large"> Formulaire de contact </h3>
-                                    </div>
-                                    <form method="POST" action="https://www.mystudies.com/contact" accept-charset="UTF-8" class="pt-4 px-2 mb-0 ajax-form" enctype="multipart/form-data" autocomplete="off"><input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Vous êtes <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><select data-target="level" class="form-control input-medium select2-medium select-collapse select2-single" required name="type"><option selected="selected" value="">Sélectionnez un choix dans la liste</option><option value="student">Étudiant</option><option value="tutor">Tuteur</option><option value="parent">Parent</option><option value="other">Autre</option></select> 
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Nom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="lastname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Prénom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="firstname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12 collapse level option-student">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Niveau/classe <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" placeholder="Ex : Licence 1ère année Histoire" name="school_class" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Adresse email <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" required name="email" type="email"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Téléphone (facultatif)</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="phone" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> N° commande</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="order_id" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Sujet de votre demande </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="about" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 pb-0 col-lg-12"> Message <span class="ml-1 font-size-medium text-color-red">*</span></label>
-                                                <div class="col-lg-12"><textarea rows="6" class="form-control input-medium" required name="message" cols="50"></textarea> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="form-group row">
-                                                <div class="d-flex align-items-center mb-0 pb-0 col-lg-12">
-                                                    <div data-sitekey="6LdNhZQUAAAAAHC3wPkYGOTjDU0EqMZgLeJfoodd" class="g-recaptcha"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <button class="btn mt-3 float-left font-size-large font-weight-bolder btn-blue w-100" name="submit_1" type="submit_1" value="submit_1">Envoyer le message</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
             </div>
+
         </div>
+
+        <div class="container mt-4">
+
+            <div class="row">
+
+                <div class="col-lg-3 categories-list mb-sm-0 mb-4">
+
+    <div class="card sticked-sidebar sidebar mb-0 mb-sm-4 all-transition">
+
+        <div class="card-body d-flex flex-column justify-content-start  align-items-start pb-3 pt-3">
+
+            <a href="blog.html" class="text-dark font-size-large active anchor-link font-weight-bolder">Accueil du blog</a>
+
+            <h5 class="font-size-normal text-color-light-grey mt-3 font-weight-normal">Parcourir les catégories du blog</h5>
+
+            <div class="list-group mt-0 w-100 text-dark list-group-flush">
+                        <li class="list-group-item w-100 px-0 d-flex align-items-start flex-column">
+                        <a href="#" class="text-dark  anchor-link font-weight-bolder">  +  Aide à la rédaction</a>
+                        
+                    </li>
+                                    <li class="list-group-item w-100 px-0 d-flex align-items-start flex-column">
+                        <a href="#" class="text-dark  anchor-link font-weight-bolder">  +  Apprentissage des langues</a>
+                        
+                    </li>
+                        <li class="list-group-item w-100 px-0 d-flex align-items-start flex-column">
+                        <a href="#" class="text-dark  anchor-link font-weight-bolder">  +  Aide aux examens</a>
+                        
+                    </li>
+                
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="col-lg-9">
+
+<div class="card-columns">
+
+    <a href="#" class="card mb-4 decoration-none article card-shadow">
+
+    <img src="storage/uploads/blog_posts/27/5d7a69bc93ff1-290x1925d35.jpg?token=d9bce2301b86dd29bb53ccbbf24491c5" class="w-100" alt="">
+
+    <div class="card-body px-4 card-padding">
+        <h5 class="card-title font-size-medium font-weight-bolder text-lg-left text-md-center text-center"><span class="text-color-blue"> Les 12 techniques pour réviser efficacement</span>
+
+        </h5>
+        <p class="font-size-normal text-sm-left text-center mt-2"><span class="text-dark"> C&#039;est de nouveau la rentrée, vous êtes déterminé.e à réussir votre année mais difficile de tirer un trait sur la période...</span></p>
+        <small class="w-100 float-left font-size-small pb-3 text-lg-left text-md-center text-secondary text-center">12/09/2019</small>
+    </div>
+    <!--bloge FILE-->
+</a>
+<a href="#" class="card mb-4 decoration-none article card-shadow">
+
+    <!--STORAGE FILE-->
+
+    <img src="storage/uploads/blog_posts/26/5d7a5cd139a15-290x192492d.jpg?token=6e78eddda31925d03c839e3cc8487f1c" class="w-100" alt="">
+
+    <div class="card-body px-4 card-padding">
+        <h5 class="card-title font-size-medium font-weight-bolder text-lg-left text-md-center text-center"><span class="text-color-blue"> Nos astuces pour appréhender au mieux sa recherche de stage</span>
+
+        </h5>
+        <p class="font-size-normal text-sm-left text-center mt-2"><span class="text-dark"> La recherche de stage est souvent perçue par les étudiants comme une étape compliquée. C&#039;est pourtant l&#039;un des moments l...</span></p>
+        <small class="w-100 float-left font-size-small pb-3 text-lg-left text-md-center text-secondary text-center">12/09/2019</small>
+    </div>
+
+</a>    <a href="#" class="card mb-4 decoration-none article card-shadow">
+
+    <img src="storage/uploads/blog_posts/25/5d3ae56196411-290x1923698.jpg?token=957400d27d297e74e2f16037b9ab8fff" class="w-100" alt="">
+
+    <div class="card-body px-4 card-padding">
+        <h5 class="card-title font-size-medium font-weight-bolder text-lg-left text-md-center text-center"><span class="text-color-blue"> Comment rédiger un bon CV?</span>
+
+        </h5>
+        <p class="font-size-normal text-sm-left text-center mt-2"><span class="text-dark"> À la recherche d&#039;un stage ou d&#039;un premier emploi ? Votre CV va devenir votre meilleur allié... à condition qu&#039;il soit bi...</span></p>
+        <small class="w-100 float-left font-size-small pb-3 text-lg-left text-md-center text-secondary text-center">22/07/2019</small>
     </div>
 
 
-    <script defer src='../www.google.com/recaptcha/api.js'></script>
+</a> <a href="#" class="card mb-4 decoration-none article card-shadow">
+
+    <img src="storage/uploads/blog_posts/23/comment-apprehender-au-mieux-loral-de-francais-du-bac-290x1920a78.jpg?token=f1743940535a02da7558e13f337714a2" class="w-100" alt="">
+
+    <div class="card-body px-4 card-padding">
+        <h5 class="card-title font-size-medium font-weight-bolder text-lg-left text-md-center text-center">
+            <span class="text-color-blue"> Comment appréhender au mieux l&#039;oral de français du BAC ?</span>
+        </h5>
+        <p class="font-size-normal text-sm-left text-center mt-2"><span class="text-dark"> Les conseils de MyStudies afin de vous préparer correctement à l&#039;approche de votre épreuve orale du Baccalauréat de fran...</span></p>
+        <small class="w-100 float-left font-size-small pb-3 text-lg-left text-md-center text-secondary text-center">05/06/2019</small>
+    </div>
+
+    </a>  <a href="#" class="card mb-4 decoration-none article card-shadow">
+
+    <img src="storage/uploads/blog_posts/22/comment-se-preparer-au-mieux-pour-les-epreuves-du-bac-290x1925d85.jpg?token=612924b4b9695327d2cf973ca8375931" class="w-100" alt="">
+
+    <div class="card-body px-4 card-padding">
+        <h5 class="card-title font-size-medium font-weight-bolder text-lg-left text-md-center text-center"><span class="text-color-blue"> Comment se préparer au mieux pour les épreuves du bac ?</span>
+
+        </h5>
+        <p class="font-size-normal text-sm-left text-center mt-2"><span class="text-dark"> Les conseils de MyStudies pour vous préparez au mieux à l&#039;approche du Baccalauréat 2019 !</span></p>
+        <small class="w-100 float-left font-size-small pb-3 text-lg-left text-md-center text-secondary text-center">03/06/2019</small>
+    </div>
+
+</a>                                                    <a href="blog/aide-a-la-redaction/comment-eviter-de-faire-des-fautes-dorthographe.html" class="card mb-4 decoration-none article card-shadow">
+
+    <img src="storage/uploads/blog_posts/21/comment-eviter-de-faire-des-fautes-dorthographe-290x192925e.jpg?token=446da0780acac3f195c05915d147941b" class="w-100" alt="">
+
+    <div class="card-body px-4 card-padding">
+        <h5 class="card-title font-size-medium font-weight-bolder text-lg-left text-md-center text-center"><span class="text-color-blue"> Comment éviter de faire des fautes d&#039;orthographe ?</span>
+
+        </h5>
+        <p class="font-size-normal text-sm-left text-center mt-2"><span class="text-dark"> Les conseils de MyStudies pour améliorer son orthographe !</span></p>
+        <small class="w-100 float-left font-size-small pb-3 text-lg-left text-md-center text-secondary text-center">29/03/2019</small>
+    </div>
+
+</a> <a href="#" class="card mb-4 decoration-none article card-shadow">
+
+    <img src="storage/uploads/blog_posts/20/comment-rediger-une-lettre-de-motivation-290x19254fd.jpg?token=fb759720ce8a0ac19b2de60fe336d96a" class="w-100" alt="">
+
+    <div class="card-body px-4 card-padding">
+        <h5 class="card-title font-size-medium font-weight-bolder text-lg-left text-md-center text-center"><span class="text-color-blue"> Comment rédiger une lettre de motivation ?</span>
+
+        </h5>
+        <p class="font-size-normal text-sm-left text-center mt-2"><span class="text-dark"> Les conseils de MyStudies pour rédiger au mieux votre lettre de motivation !</span></p>
+        <small class="w-100 float-left font-size-small pb-3 text-lg-left text-md-center text-secondary text-center">29/03/2019</small>
+    </div>
+
+</a>  <a href="#" class="card mb-4 decoration-none article card-shadow">
+
+    <img src="storage/uploads/blog_posts/19/comment-sameliorer-en-anglais-290x192c619.jpg?token=e633d20a4b195a24fb3ac4e99c0636ce" class="w-100" alt="">
+
+    <div class="card-body px-4 card-padding">
+        <h5 class="card-title font-size-medium font-weight-bolder text-lg-left text-md-center text-center"><span class="text-color-blue"> Comment s&#039;améliorer en anglais ?</span>
+
+        </h5>
+        <p class="font-size-normal text-sm-left text-center mt-2"><span class="text-dark"> Les conseils de MyStudies pour améliorer son niveau en langues de manière ludique !</span></p>
+        <small class="w-100 float-left font-size-small pb-3 text-lg-left text-md-center text-secondary text-center">29/03/2019</small>
+    </div>
+
+</a>   <a href="#" class="card mb-4 decoration-none article card-shadow">
+
+    <img src="storage/uploads/blog_posts/18/comment-rediger-une-bonne-dissertation-290x19244e6.jpg?token=7d68c23f44703c91385b3ba97ae9759f" class="w-100" alt="">
+
+    <div class="card-body px-4 card-padding">
+        <h5 class="card-title font-size-medium font-weight-bolder text-lg-left text-md-center text-center"><span class="text-color-blue"> Comment rédiger une bonne dissertation ?</span>
+
+        </h5>
+        <p class="font-size-normal text-sm-left text-center mt-2"><span class="text-dark"> Les conseils de MyStudies pour améliorer vos compétences en rédaction de dissertation !</span></p>
+        <small class="w-100 float-left font-size-small pb-3 text-lg-left text-md-center text-secondary text-center">29/03/2019</small>
+    </div>
+
+</a>                        
+    </div>
+
+        <div class="col-lg-12 pagination-blog p-0">
+                        
+        </div>
+
+
+        </div>
+
+        </div>
+
+
+        </div>
+
+    </div>
 
 <div class="container-fluid newsletter-register pt-4 mt-4 pb-4">
 
@@ -439,7 +463,7 @@
 
             <div class="col-12 text-sm-left text-center col-sm-7">
                 <span class="font-weight-light text-sm-right text-center float-sm-right font-size-larger mt-1">
-                                            <span class="font-weight-bolder">Ne manquez plus nos promos et bénéficiez jusqu’à 50% de réduction</span> une fois par semaine à travers :                                    </span>
+                <span class="font-weight-bolder">Ne manquez plus nos promos et bénéficiez jusqu’à 50% de réduction</span> une fois par semaine à travers :                                    </span>
             </div>
 
             <div class="col-12 mt-sm-0 mt-3 col-sm-3">
@@ -506,7 +530,7 @@
     <div class="container pt-4 pb-4">
         <div class="row pt-2 pb-3">
             <div class="col-lg-4 col-12 col-sm-6">
-                <img src="imgs/logo_2.png" class="logo-footer mt-1" alt="">
+                <img src="imgs/logo_2.PNG" class="logo-footer mt-1" alt="">
                 <p class="font-size-medium  pr-sm-5 font-weight-semibold pt-2 mt-4 mb-2 mb-sm-4  pb-3 text-color-light-grey">MyStudies.com a pour unique but d'aider les étudiants à progresser durant leurs études. Les documents commandés sur MyStudies.com sont des modèles qui doivent être utilisés en référence appropriée et qui ne peuvent donc pas être rendus en l’état à un établissement scolaire ou universitaire.</p>
                 <span class="font-weight-bolder text-uppercase mt-4 pt-3 pb-3 font-size-xmedium text-white"> <b> Contact et support</b>  </span>
                 <div class="font-size-normal mt-xl-1 mt-md-2 pt-3 d-flex flex-column">
@@ -627,11 +651,11 @@
         <div class="row pt-xl-3 pb-xl-3 pt-sm-2 pb-sm-2">
             <div class="col-lg-4 mb-sm-0 mt-sm-0 mt-2 mb-2 text-center text-sm-left">
                 <span style="margin-top: 1px;" class="text-white font-weight-bold font-size-normal"> © Copyright 2019 Mystudies.com - <a class="text-white font-weight-normal font-size-normal"
-                            href="charte-donnees-personnelles.html">Charte de confidentialité</a></span>
+                href="charte-donnees-personnelles.html">Charte de confidentialité</a></span>
             </div>
             <div class="col-lg-6 d-flex align-items-center pl-sm-5 mb-sm-0 mt-sm-0 mt-2 mb-2 text-center text-sm-left">
                 <span class="text-white float-right font-size-lsmall">
-                    <a class="text-white" target="_blank" href="https://www.checkout.com/"><i class="fas fa-shield-check"></i> Paiement 100 % sécurisé avec notre partenaire <b>checkout </b>.com                        <img src="imgs/payments.png" style="margin-top:-1px;" class="ml-2 mt-sm-0 mt-2 logo-footer mr-0" alt=""></a> &nbsp;&nbsp;
+                    <a class="text-white" target="_blank" href="https://www.checkout.com/"><i class="fas fa-shield-check"></i> Paiement 100 % sécurisé avec notre partenaire <b>checkout </b>.com <img src="imgs/payments.png" style="margin-top:-1px;" class="ml-2 mt-sm-0 mt-2 logo-footer mr-0" alt=""></a> &nbsp;&nbsp;
                 </span>
             </div>
             <div class="col-lg-2 mb-sm-0 mt-sm-0 mt-2 mb-2 text-center text-sm-left">
@@ -641,10 +665,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 </body>
 
 <script src="js/manifest9dd0.js?id=ecd8679b8a9f31fdea9b"></script>

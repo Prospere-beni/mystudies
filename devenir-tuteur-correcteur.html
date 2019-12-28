@@ -1,62 +1,3 @@
-
-
-
-<?php
-    
-    include_once('dbconnexion.php');
-
-    
-    
-    if(isset($_POST['submit_1'])){
-    $lastname= $_POST['lastname'];
-    $firstname= htmlspecialchars($_POST["firstname"]);
-    $school_class= htmlspecialchars($_POST["school_class"]);
-    $email=htmlspecialchars($_POST["email"]); 
-    $phone= htmlspecialchars( $_POST["phone"]);
-    $order_id= $_POST["order_id"];
-    $about= $_POST["about"];
-    $message= $_POST["message"];
-
-    //echo $lastname;
-    //echo $firstname;
-    //echo $school_class;
-    //echo $email;
-    //echo $phone;
-    //echo $order_id;
-    //echo $about;
-    //echo $message;
-
-
-    //On insère les données reçues si les champs sont remplis
-    if(!empty($lastname)  && !empty($firstname) && !empty($school_class) && !empty($email)  && !empty($phone) && !empty($order_id) && !empty($about) && !empty($message)){
-                 
-                $sth = $dbco->prepare("
-                    INSERT INTO membres(lastname , firstname , school_class , email , phone , order_id , about , message)
-                    VALUES(:lastname, :firstname, :school_class, :email, :phone, :order_id, :about,:message)");
-
-                    $sth->bindValue(':lastname', $lastname);
-                    $sth->bindValue(':firstname', $firstname);
-                    $sth->bindValue(':school_class', $school_class);
-                    $sth->bindValue(':email',  $email);
-                    $sth->bindValue(':phone', $phone);
-                    $sth->bindValue(':order_id', $order_id);
-                    $sth->bindValue(':about',  $about);
-                    $sth->bindValue(':message',  $message);
-                    $exec  =  $sth->execute();
-                    
-                      //On renvoie l'utilisateur vers la page de remerciement
-                      header("Location:index.html");
-                    
-            }
-
-}
-
-
-   
-    
-?>
-
-
 <!doctype html>
 
 <html lang="fr">
@@ -65,8 +6,8 @@
 <link rel="dns-prefetch" href="index.html">
 <link rel="dns-prefetch" href="http://www.googletagmanager.com/">
 <link rel="dns-prefetch" href="http://cdnjs.cloudflare.com/">
-<link rel="dns-prefetch" href="http://www.google.com/">
 <link rel="dns-prefetch" href="http://www.facebook.com/">
+<link rel="dns-prefetch" href="http://fr.trustpilot.com/">
 <link rel="dns-prefetch" href="http://www.instagram.com/">
 <link rel="dns-prefetch" href="http://twitter.com/">
 <link rel="dns-prefetch" href="http://www.linkedin.com/">
@@ -77,10 +18,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD">
 
-    <title>Contactez-nous ! - MyStudies.com</title>
-<meta name="description" content="Notre &eacute;quipe se tient &agrave; votre disposition pour vous assister ou vous informer. Remplissez le formulaire de contact.">
-<meta name="keywords" content="contact">
-<link rel="canonical" href="contact.html"/>
+    <title>Devenir tuteur - MyStudies.com</title>
+<meta name="description" content="Apportez votre soutien acad&eacute;mique &agrave; des &eacute;tudiants qui ne parviennent pas &agrave; trouver autour d&rsquo;eux l&rsquo;aide dont ils ont besoin et augmentez ainsi vos revenus.">
+<meta name="keywords" content="">
+<link rel="canonical" href="devenir-tuteur-correcteur.html"/>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
@@ -241,7 +182,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                                            <a class="navbar-brand d-none d-sm-block logo-large" href="index.html"><img src="imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a>
+                    <a class="navbar-brand d-none d-sm-block logo-large" href="index.html"><img src="imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a>
                          <a class="navbar-brand d-block d-sm-none logo-large" href="index.html"><img src="imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a>
                     
                     <div class="d-none d-sm-block"> <a class="navbar-brand logo-min" href="index.html"><img src="imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a> </div>
@@ -249,13 +190,14 @@
 
                     <div class="ml-0 ml-xl-4 mr-3 collapse navbar-collapse justify-content-start" id="navbarNavAltMarkup">
 
-                        <div class="navbar-nav">
+                         <div class="navbar-nav">
 
                             <a title="Commander un document scolaire" class="all-transition document-service d-flex flex-column nav-item text-color-white font-weight-bold nav-link " href="documents.html">Rédaction académique  </a>
                             <a title="Corriger un document scolaire" class="all-transition correction-service d-flex flex-column nav-item text-color-white font-weight-bold nav-link " href="corrections.html"> Correction et amélioration </a>
                             <a title="Place de marché de documents scolaires" class="all-transition marketplace-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link " href="place-de-marche.html"> Achat/Vente de documents </a>
                             <a title="Cours en ligne" href="cours-en-ligne.html" class="all-transition course-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link ">Cours particuliers en ligne </a>
                         </div>
+
                     </div>
 
                 </nav>
@@ -270,15 +212,24 @@
                                 <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
                                     <input name="language_id" type="hidden" value="1"> 
 
-                                    <div data-toggle="popover" data-placement="top" data-content="Under development">
-                                    <button class="all-transition disabled  dropdown-item active"><img src="imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
+
+                                                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
+                                            <button class="all-transition disabled  dropdown-item active"><img src="imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
+
+                                    
                                     </form>
 
-                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+                                                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
                                     <input name="language_id" type="hidden" value="2"> 
-                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
+
+
+                                                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
                                             <button class="all-transition disabled  dropdown-item "><img src="imgs/flag_en.png" class="mr-1 mb-1" alt=""> Anglais</button> </div>
+
+                                    
                                     </form>
+
+                                
                             </div>
                         </div>
                     </div>
@@ -315,121 +266,189 @@
             </div>
 </header>
 
-    <div class="container-fluid bg-contact pb-3">
+    <div class="container-fluid pb-0">
         <div class="container pt-3">
-            <div class="content-main-title pb-2">
+            <div class="content-main-title pb-0">
                 <div class="d-flex flex-column align-items-center">
-                    <div class="text-center w-100">
-                        <h3 class="text-color-blue text-center mt-0 mb-0 nunito font-weight-bolder font-size-xxlarge">Contactez-nous </h3>
-                        <span class="font-size-normal text-dark font-size-large"> Notre équipe se tient à votre disposition pour vous assister ou vous informer.  </span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="card mt-3">
-                        <div class="card-body pt-0">
-                            <div class="row">
-                                <div class="col-lg-12 px-4 pb-3 pt-2">
-                                    <div class="d-flex flex-column mt-3 pt-2 align-items-center">
-                                        <img src="imgs/icon-mail.png" class="pt-1" alt="">
-                                        <h3 class="text-center font-weight-bolder mt-2 pt-1 pb-0 mb-0 font-size-large"> Formulaire de contact </h3>
-                                    </div>
-                                    <form method="POST" action="https://www.mystudies.com/contact" accept-charset="UTF-8" class="pt-4 px-2 mb-0 ajax-form" enctype="multipart/form-data" autocomplete="off"><input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Vous êtes <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><select data-target="level" class="form-control input-medium select2-medium select-collapse select2-single" required name="type"><option selected="selected" value="">Sélectionnez un choix dans la liste</option><option value="student">Étudiant</option><option value="tutor">Tuteur</option><option value="parent">Parent</option><option value="other">Autre</option></select> 
-                                                </div>
-                                            </div>
-                                        </div>
+                    <div class="ml-0 text-left w-100">
 
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Nom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="lastname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Prénom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="firstname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
+                        <h1 class="text-dark text-center mt-0 font-weight-light mb-2 nunito font-size-xxlarge"><span class="font-weight-bolder">Augmentez vos revenus</span> grâce à Mystudies en aidant des milliers d’étudiants </h1>
 
-                                        <div class="col-lg-12 collapse level option-student">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Niveau/classe <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" placeholder="Ex : Licence 1ère année Histoire" name="school_class" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
+                        <h2 class="font-size-xmedium w-100 text-center mb-3"> Sur mystudies vous choisissez de travailler dans un ou plusieurs des services ci-dessous : </h2>
 
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Adresse email <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" required name="email" type="email"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Téléphone (facultatif)</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="phone" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> N° commande</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="order_id" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
+                        <div class="row mt-4">
+                            <div class="col-lg-4">
+                                <div class="d-flex mb-2">
+                                    <div class="card card-body border-top-yellow">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="imgs/icon-document-large.png" class="mt-0" alt="">
+                                            <span class="text-color-yellow pt-0 mt-2 font-size-large text-center line-height-medium font-weight-bolder nunito">Rédaction de documents sur mesure</span>
+                                            <div class="text-left mt-3 mb-3 w-100 float-left text-dark line-height-large">
+                                                <ul class="list-group w-100 float-left list-group-flush">
+                                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-3"></span><span class="text-center">Transmettez vos méthodes de rédaction</span>
+                                                    </li>
 
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Sujet de votre demande </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="about" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 pb-0 col-lg-12"> Message <span class="ml-1 font-size-medium text-color-red">*</span></label>
-                                                <div class="col-lg-12"><textarea rows="6" class="form-control input-medium" required name="message" cols="50"></textarea> 
-                                                </div>
-                                            </div>
-                                        </div>
+                                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-3"></span><span
+                                                                class="text-center">Aidez les étudiants à améliorer leurs notes</span></li>
 
-                                        <div class="col-lg-6">
-                                            <div class="form-group row">
-                                                <div class="d-flex align-items-center mb-0 pb-0 col-lg-12">
-                                                    <div data-sitekey="6LdNhZQUAAAAAHC3wPkYGOTjDU0EqMZgLeJfoodd" class="g-recaptcha"></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-3"></span><span class="text-center">Choisissez les commandes qui vous intéressent</span>
+                                                    </li>
 
-                                        <div class="col-lg-6">
-                                            <button class="btn mt-3 float-left font-size-large font-weight-bolder btn-blue w-100" name="submit_1" type="submit_1" value="submit_1">Envoyer le message</button>
+                                                </ul>
+                                            </div>
+
+                                        
+
+                                            <a href="tuteur/inscription.php" class="btn btn-sm font-size-xmedium mt-0 py-1 px-4 font-weight-bold w-100 btn-yellow all-transition"> Devenir tuteur <i
+                                                        class="fas fa-angle-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
-                                </form>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="d-flex mb-2">
+                                    <div class="card card-body border-top-blue">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="imgs/icon-correction-large.png" class="pr-2 mt-0" alt="">
+                                            <span class="text-color-blue pt-0 mt-2 font-size-large text-center line-height-medium font-weight-bolder nunito">Correction et relecture de documents scolaires</span>
+                                            <div class="text-left mt-3 mb-3 w-100 float-left text-dark line-height-large">
+                                                <ul class="list-group w-100 float-left list-group-flush">
+                                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-3"></span> <span
+                                                                class="text-center">Mettez à profit votre excellence académique</span></li>
+
+                                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-3"></span> <span class="text-center">Améliorez le contenu des rédactions</span>
+                                                    </li>
+
+                                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-3"></span> <span
+                                                                class="text-center">Contribuez à la réussite des étudiants</span></li>
+
+                                                </ul>
+                                            </div>
+
+                                        
+
+                                            <a href="tuteur/inscription.php" class="btn btn-sm font-size-xmedium py-1 px-4  font-weight-bold btn-blue w-100 all-transition"> Devenir tuteur <i
+                                                        class="fas fa-angle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="d-flex mb-2">
+                                    <div class="card card-body border-top-pink">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img src="imgs/icon-stream-large.png" class="mt-0" alt="">
+                                            <span class="text-color-pink pt-0 mt-2 font-size-large text-center line-height-medium font-weight-bolder nunito">Donner des cours particuliers en ligne</span>
+                                            <div class="text-left mt-3 mb-3 w-100 float-left text-dark line-height-large">
+                                                <ul class="list-group w-100 float-left list-group-flush">
+                                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-3"></span> <span class="text-center">Transmettez vos connaissances</span></li>
+
+                                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-3"></span> <span
+                                                                class="text-center">Redonnez le goût d’apprendre aux étudiants </span></li>
+
+                                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-3"></span> <span
+                                                                class="text-center">Ayez un contact direct avec votre étudiant </span></li>
+
+                                                </ul>
+                                            </div>
+
+                                        
+
+                                    <a href="tuteur/inscription.php" class="btn btn-sm font-size-xmedium  py-1 px-4 w-100 font-weight-bold btn-pink all-transition"> Ouverture prochaine </a>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 
+    <div class="container-fluid bg-professor-home pt-4 mt-2 pb-4">
+        <div class="container pt-0">
+            <div class="d-flex flex-column mt-0 mb-3">
+                <span class="font-size-normal mb-2 text-dark font-size-large"><i class="fas fa-check-circle text-color-blue mr-2"></i> <span class="font-weight-bolder text-color-blue">Maîtrisez votre rémunération</span> en séléctionnant les commandes qui vous intéressent.  </span>
+                <span class="font-size-normal mb-2 text-dark font-size-large"><i class="fas fa-check-circle text-color-blue mr-2"></i> <span class="font-weight-bolder text-color-blue">Travaillez en toute liberté</span>, où vous le souhaitez et quand vous le souhaitez.  </span>
+                <span class="font-size-normal mb-2 text-dark font-size-large"><i class="fas fa-check-circle text-color-blue mr-2"></i> <span class="font-weight-bolder text-color-blue">Echangez avec les étudiants</span> et améliorez vos compétences. </span>
+                <span class="font-size-normal mb-2 text-dark font-size-large"><i class="fas fa-check-circle text-color-blue mr-2"></i> Rejoignez notre communauté de <span
+                            class="font-weight-bolder text-color-blue">plus de 3000 tuteurs.</span></span>
+                <div class="row mt-4 pt-3">
+                    <div class="col-lg-8">
+                        <span class="font-weight-bolder pb-3 mt-4 pt-2 text-dark font-size-large"> ...mais aussi, vendez des documents sur notre place de marché  : </span>
+                        <p class="mt-3">
+                            Sur Mystudies.com, nous vous offrons l’opportunité de mettre en vente des documents académiques (mémoires, dissertations, fiches de révisions…). Les documents seront analysés par nos équipes afin d’en vérifier la
+                            qualité. Vous toucherez une rémunération à chaque fois que votre document sera téléchargé !
+                        </p>
+                        <div class="d-flex mt-0 mb-0 justify-content-start align-items-center">
+                            <span class="font-size-large font-weight-bolder text-color-dark-green">Pour chaque vente vous recevrez 5€ de rémunération !</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex mt-4 mb-3 justify-content-start align-items-center">
+                    <a class="btn btn-blue font-weight-bolder mt-2 mb-3 font-size-large px-4 " href="contact.php"> Une question ? Contactez-nous </a>
+                </div>
+            </div>
 
-    <script defer src='../www.google.com/recaptcha/api.js'></script>
+            <div class="d-flex flex-column w-100 w-sm-50">
+                <h4 class="font-size-xlarge mt-2 text-left"> Avis de nos tuteurs </h4>
+                <ul class="nav nav-tabs mt-4 justify-content-sm-start justify-content-center" id="tabOpinions" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link font-size-medium font-weight-bold d-flex align-items-center active" id="facebook-opinions-nav" data-toggle="tab" href="#facebook-opinions" role="tab" aria-controls="home" aria-selected="true"><i class="fab text-color-facebook fa-facebook-square mr-2"></i> Avis Facebook</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link font-size-medium font-weight-bold d-flex align-items-center" id="trustpilot-opinions-nav" data-toggle="tab" href="#trustpilot-opinions" role="tab" aria-controls="profile"
+                                aria-selected="false">  <img src="imgs/trustpilot_logo.png" style="" class="mr-1" alt="avis tuteurs MyStudies"> Avis Trustpilot</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="tabOpinionsContent">
+                    <div class="tab-pane fade show active" id="facebook-opinions" role="tabpanel" aria-labelledby="facebook-opinions">
+    <div id="carouselExampleIndicators" data-interval="10000" class="carousel slide">
+        <div class="carousel-inner d-flex mt-3">
+
+                            <div class="carousel-item  text-center  active ">
+                    <div class="d-flex mt-3 align-items-center justify-content-center">
+                        <div class="px-3 d-none d-sm-block"> <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fjoel.boue.7%2Fposts%2F10156261653331446&amp;width=500" width="500" height="237" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> </div>
+                        <div class="px-3 d-block d-sm-none"> <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fjoel.boue.7%2Fposts%2F10156261653331446&amp;width=360" width="360" height="237" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> </div>
+                    </div>
+                </div>
+                            <div class="carousel-item  text-center ">
+                    <div class="d-flex mt-3 align-items-center justify-content-center">
+                        <div class="px-3 d-none d-sm-block"> <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fannebusi24%2Fposts%2F10215713836373774&amp;width=500" width="500" height="256" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> </div>
+                        <div class="px-3 d-block d-sm-none"> <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fannebusi24%2Fposts%2F10215713836373774&amp;width=360" width="360" height="256" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> </div>
+                    </div>
+                </div>
+                            <div class="carousel-item  text-center ">
+                    <div class="d-flex mt-3 align-items-center justify-content-center">
+                        <div class="px-3 d-none d-sm-block"> <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fbenjamin.kapchik%2Fposts%2F10219391227797125&amp;width=500" width="500" height="275" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> </div>
+                        <div class="px-3 d-block d-sm-none"> <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fbenjamin.kapchik%2Fposts%2F10219391227797125&amp;width=360" width="360" height="275" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> </div>
+                    </div>
+                </div>
+                            <div class="carousel-item  text-center ">
+                    <div class="d-flex mt-3 align-items-center justify-content-center">
+                        <div class="px-3 d-none d-sm-block"> <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fjoel.boue.7%2Fposts%2F10156261653331446&amp;width=500" width="500" height="237" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> </div>
+                        <div class="px-3 d-block d-sm-none"> <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fjoel.boue.7%2Fposts%2F10156261653331446&amp;width=360" width="360" height="237" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> </div>
+                    </div>
+                </div>
+                    </div>
+        <ol class="carousel-indicators mb-0 pt-0 mt-3">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0"  class="active" ></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1" ></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2" ></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="3" ></li>
+                    </ol>
+    </div>
+</div>                    <div class="tab-pane fade" id="trustpilot-opinions" role="tabpanel" aria-labelledby="trustpilot-opinions">
+                        <div class="trustpilot-widget mt-4 pt-3" data-locale="fr-FR" data-template-id="53aa8912dec7e10d38f59f36" data-businessunit-id="5c51cde8fb592e00014d1058" data-style-height="130px" data-style-width="100%"
+                                data-theme="light" data-tags="tutors" data-stars="4,5" data-schema-type="Organization"><a href="https://fr.trustpilot.com/review/mystudies.com" target="_blank">Avis de nos tuteurs Mystudies sur Trustpilot</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <div class="container-fluid newsletter-register pt-4 mt-4 pb-4">
 

@@ -1,62 +1,3 @@
-
-
-
-<?php
-    
-    include_once('dbconnexion.php');
-
-    
-    
-    if(isset($_POST['submit_1'])){
-    $lastname= $_POST['lastname'];
-    $firstname= htmlspecialchars($_POST["firstname"]);
-    $school_class= htmlspecialchars($_POST["school_class"]);
-    $email=htmlspecialchars($_POST["email"]); 
-    $phone= htmlspecialchars( $_POST["phone"]);
-    $order_id= $_POST["order_id"];
-    $about= $_POST["about"];
-    $message= $_POST["message"];
-
-    //echo $lastname;
-    //echo $firstname;
-    //echo $school_class;
-    //echo $email;
-    //echo $phone;
-    //echo $order_id;
-    //echo $about;
-    //echo $message;
-
-
-    //On insère les données reçues si les champs sont remplis
-    if(!empty($lastname)  && !empty($firstname) && !empty($school_class) && !empty($email)  && !empty($phone) && !empty($order_id) && !empty($about) && !empty($message)){
-                 
-                $sth = $dbco->prepare("
-                    INSERT INTO membres(lastname , firstname , school_class , email , phone , order_id , about , message)
-                    VALUES(:lastname, :firstname, :school_class, :email, :phone, :order_id, :about,:message)");
-
-                    $sth->bindValue(':lastname', $lastname);
-                    $sth->bindValue(':firstname', $firstname);
-                    $sth->bindValue(':school_class', $school_class);
-                    $sth->bindValue(':email',  $email);
-                    $sth->bindValue(':phone', $phone);
-                    $sth->bindValue(':order_id', $order_id);
-                    $sth->bindValue(':about',  $about);
-                    $sth->bindValue(':message',  $message);
-                    $exec  =  $sth->execute();
-                    
-                      //On renvoie l'utilisateur vers la page de remerciement
-                      header("Location:index.html");
-                    
-            }
-
-}
-
-
-   
-    
-?>
-
-
 <!doctype html>
 
 <html lang="fr">
@@ -65,7 +6,6 @@
 <link rel="dns-prefetch" href="index.html">
 <link rel="dns-prefetch" href="http://www.googletagmanager.com/">
 <link rel="dns-prefetch" href="http://cdnjs.cloudflare.com/">
-<link rel="dns-prefetch" href="http://www.google.com/">
 <link rel="dns-prefetch" href="http://www.facebook.com/">
 <link rel="dns-prefetch" href="http://www.instagram.com/">
 <link rel="dns-prefetch" href="http://twitter.com/">
@@ -77,10 +17,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD">
 
-    <title>Contactez-nous ! - MyStudies.com</title>
-<meta name="description" content="Notre &eacute;quipe se tient &agrave; votre disposition pour vous assister ou vous informer. Remplissez le formulaire de contact.">
-<meta name="keywords" content="contact">
-<link rel="canonical" href="contact.html"/>
+    <title>Commander un document sur mesure - MyStudies.com</title>
+<meta name="description" content="Commandez &agrave; l&rsquo;un de nos tuteurs sp&eacute;cialis&eacute;s un document personnalis&eacute; et sur-mesure (dissertation, exercices, m&eacute;moires, CV, lettre de motivation&hellip;).">
+<meta name="keywords" content="">
+<link rel="canonical" href="documents.html"/>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
@@ -248,7 +188,6 @@
                      <div class="d-block d-sm-none"> <a class="navbar-brand logo-min" href="index.html"><img src="imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a> </div>
 
                     <div class="ml-0 ml-xl-4 mr-3 collapse navbar-collapse justify-content-start" id="navbarNavAltMarkup">
-
                         <div class="navbar-nav">
 
                             <a title="Commander un document scolaire" class="all-transition document-service d-flex flex-column nav-item text-color-white font-weight-bold nav-link " href="documents.html">Rédaction académique  </a>
@@ -256,6 +195,7 @@
                             <a title="Place de marché de documents scolaires" class="all-transition marketplace-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link " href="place-de-marche.html"> Achat/Vente de documents </a>
                             <a title="Cours en ligne" href="cours-en-ligne.html" class="all-transition course-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link ">Cours particuliers en ligne </a>
                         </div>
+
                     </div>
 
                 </nav>
@@ -267,18 +207,27 @@
                             <img src="imgs/flag_fr.png" style="margin-top: -4px;" class="ml-2 icon-top-header" alt="">
                             <a href="#" id="language" data-toggle="dropdown" class="all-transition font-size-medium font-weight-bold ml-1 dropdown-toggle" aria-haspopup="true" aria-expanded="false"> </a>
                             <div class="dropdown-menu" aria-labelledby="language">
-                                <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+                                                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
                                     <input name="language_id" type="hidden" value="1"> 
 
-                                    <div data-toggle="popover" data-placement="top" data-content="Under development">
-                                    <button class="all-transition disabled  dropdown-item active"><img src="imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
+
+                                                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
+                                            <button class="all-transition disabled  dropdown-item active"><img src="imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
+
+                                    
                                     </form>
 
-                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+                                                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
                                     <input name="language_id" type="hidden" value="2"> 
-                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
+
+
+                                                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
                                             <button class="all-transition disabled  dropdown-item "><img src="imgs/flag_en.png" class="mr-1 mb-1" alt=""> Anglais</button> </div>
+
+                                    
                                     </form>
+
+                                
                             </div>
                         </div>
                     </div>
@@ -315,121 +264,252 @@
             </div>
 </header>
 
-    <div class="container-fluid bg-contact pb-3">
+
+    <div class="container-fluid">
         <div class="container pt-3">
             <div class="content-main-title pb-2">
                 <div class="d-flex flex-column align-items-center">
                     <div class="text-center w-100">
-                        <h3 class="text-color-blue text-center mt-0 mb-0 nunito font-weight-bolder font-size-xxlarge">Contactez-nous </h3>
-                        <span class="font-size-normal text-dark font-size-large"> Notre équipe se tient à votre disposition pour vous assister ou vous informer.  </span>
+                        <h1 class="font-size-large text-color-yellow mb-0 mt-0 font-weight-bolder"> Commander un document sur mesure </h1>
+                        <h2 class="font-size-xlarge mt-2 mb-2 mt-sm-0 mb-sm-1"> Choisissez le type de document que vous souhaitez commander. </h2>
+                        <div class="font-size-normal px-sm-0 px-2"><span><i class="fal fa-check"></i> Document 100% unique et sur mesure </span> &nbsp;|&nbsp; <span> <i class="fal fa-check"></i> Test anti-plagiat </span> &nbsp;|&nbsp; <span><i class="fal fa-check"></i> Tuteurs expérimentés</span> &nbsp;|&nbsp;<span><i class="fal fa-check"></i> Révision gratuite</span> &nbsp;|&nbsp; <span><i class="fal fa-check"></i> Communication avec le tuteur</span></div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="card mt-3">
-                        <div class="card-body pt-0">
-                            <div class="row">
-                                <div class="col-lg-12 px-4 pb-3 pt-2">
-                                    <div class="d-flex flex-column mt-3 pt-2 align-items-center">
-                                        <img src="imgs/icon-mail.png" class="pt-1" alt="">
-                                        <h3 class="text-center font-weight-bolder mt-2 pt-1 pb-0 mb-0 font-size-large"> Formulaire de contact </h3>
+            <div class="content-cards content-documents mt-3 pb-2">
+                <div class="content-cards content-documents mt-0 pb-2 row">
+
+            <div class="col-lg-3">
+    <a href="documents/document-scolaire.html">
+        <div class="card one-document-type mb-4 all-transition">
+            <img src="storage/uploads/default/services/document_scolaire-290x1823af3.png?token=f95753e1135081cf7dc94be27f336d3e" class="" alt="">
+            <div class="card-body d-flex flex-column pb-3 pt-3">
+
+
+
+                <div class="d-flex align-items-start">
+                    <h5 class="card-title font-weight-bolder mt-0 mb-0 font-size-xmedium"><a href="documents/document-scolaire.html">Document scolaire et universitaire</a></h5>
+                                            <div class="text-right ml-auto float-right">
+                            <span class="font-size-small mt-0 w-100 float-right text-right nunito">à partir de</span>
+                            <span class="font-size-xmedium service-price text-right w-100 float-right text-color-dark-blue font-weight-bolder">14,50 €</span>
+                        </div>
                                     </div>
-                                    <form method="POST" action="https://www.mystudies.com/contact" accept-charset="UTF-8" class="pt-4 px-2 mb-0 ajax-form" enctype="multipart/form-data" autocomplete="off"><input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Vous êtes <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><select data-target="level" class="form-control input-medium select2-medium select-collapse select2-single" required name="type"><option selected="selected" value="">Sélectionnez un choix dans la liste</option><option value="student">Étudiant</option><option value="tutor">Tuteur</option><option value="parent">Parent</option><option value="other">Autre</option></select> 
-                                                </div>
-                                            </div>
-                                        </div>
+                <div class="d-flex flex-row">
 
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Nom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="lastname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Prénom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="firstname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
+                    <div>
+                        <p class="card-text mb-0 mt-0 text-color-light-grey font-size-lsmall nunito">Dissertation, exercice, analyse...</p>
 
-                                        <div class="col-lg-12 collapse level option-student">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Niveau/classe <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" placeholder="Ex : Licence 1ère année Histoire" name="school_class" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
+                    </div>
 
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Adresse email <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" required name="email" type="email"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Téléphone (facultatif)</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="phone" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> N° commande</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="order_id" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
+                </div>
 
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Sujet de votre demande </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="about" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 pb-0 col-lg-12"> Message <span class="ml-1 font-size-medium text-color-red">*</span></label>
-                                                <div class="col-lg-12"><textarea rows="6" class="form-control input-medium" required name="message" cols="50"></textarea> 
-                                                </div>
-                                            </div>
-                                        </div>
+            </div>
 
-                                        <div class="col-lg-6">
-                                            <div class="form-group row">
-                                                <div class="d-flex align-items-center mb-0 pb-0 col-lg-12">
-                                                    <div data-sitekey="6LdNhZQUAAAAAHC3wPkYGOTjDU0EqMZgLeJfoodd" class="g-recaptcha"></div>
-                                                </div>
-                                            </div>
-                                        </div>
+        </div>
+    </a>
+</div>            <div class="col-lg-3">
+    <a href="documents/redaction-de-memoire.html">
+        <div class="card one-document-type mb-4 all-transition">
+            <img src="storage/uploads/default/services/document_memoire-290x1827937.png?token=511b3d094f32d8a827fbcace0c6ed7d8" class="" alt="">
+            <div class="card-body d-flex flex-column pb-3 pt-3">
 
-                                        <div class="col-lg-6">
-                                            <button class="btn mt-3 float-left font-size-large font-weight-bolder btn-blue w-100" name="submit_1" type="submit_1" value="submit_1">Envoyer le message</button>
-                                        </div>
+
+
+                <div class="d-flex align-items-start">
+                    <h5 class="card-title font-weight-bolder mt-0 mb-0 font-size-xmedium"><a href="documents/redaction-de-memoire.html">Rédaction de mémoire</a></h5>
+                                            <div class="text-right ml-auto float-right">
+                            <span class="font-size-small mt-0 w-100 float-right text-right nunito">à partir de</span>
+                            <span class="font-size-xmedium service-price text-right w-100 float-right text-color-dark-blue font-weight-bolder">217,00 €</span>
+                        </div>
                                     </div>
-                                </div>
-                                </form>
-                            </div>
+                <div class="d-flex flex-row">
+
+                    <div>
+                        <p class="card-text mb-0 mt-0 text-color-light-grey font-size-lsmall nunito">Licence, master, Doctorat...</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </a>
+</div>            <div class="col-lg-3">
+    <a href="documents/traduction-de-document.html">
+        <div class="card one-document-type mb-4 all-transition">
+            <img src="storage/uploads/default/services/document_traduction-290x1821cba.png?token=bd21801e1743867965ca0bfef4ce2f3c" class="" alt="">
+            <div class="card-body d-flex flex-column pb-3 pt-3">
+
+
+
+                <div class="d-flex align-items-start">
+                    <h5 class="card-title font-weight-bolder mt-0 mb-0 font-size-xmedium"><a href="documents/traduction-de-document.html">Traduction de document</a></h5>
+                            <div class="text-right ml-auto float-right">
+                            <span class="font-size-small mt-0 w-100 float-right text-right nunito">à partir de</span>
+                            <span class="font-size-xmedium service-price text-right w-100 float-right text-color-dark-blue font-weight-bolder">15,50 €</span>
+                        </div>
+                                    </div>
+                <div class="d-flex flex-row">
+
+                    <div>
+                        <p class="card-text mb-0 mt-0 text-color-light-grey font-size-lsmall nunito">Dans plus de 10 langues</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </a>
+</div>            
+<div class="col-lg-3">
+    <a href="documents/rapport-de-stage.html">
+        <div class="card one-document-type mb-4 all-transition">
+            <img src="storage/uploads/default/services/document_rapport-290x182cfac.png?token=00277c2e3f61929309f1a22faaea24c9" class="" alt="">
+            <div class="card-body d-flex flex-column pb-3 pt-3">
+
+
+
+                <div class="d-flex align-items-start">
+                    <h5 class="card-title font-weight-bolder mt-0 mb-0 font-size-xmedium"><a href="documents/rapport-de-stage.html">Rapport de stage</a></h5>
+                                            <div class="text-right ml-auto float-right">
+                            <span class="font-size-small mt-0 w-100 float-right text-right nunito">à partir de</span>
+                            <span class="font-size-xmedium service-price text-right w-100 float-right text-color-dark-blue font-weight-bolder">32,00 €</span>
+                        </div>
+                                    </div>
+                <div class="d-flex flex-row">
+
+                    <div>
+                        <p class="card-text mb-0 mt-0 text-color-light-grey font-size-lsmall nunito">Pour toutes les matières</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </a>
+</div>            <div class="col-lg-3">
+    <a href="documents/creation-de-curriculum-vitae.html">
+        <div class="card one-document-type mb-4 all-transition">
+            <img src="storage/uploads/default/services/document_cv-290x182adc7.png?token=a5c83d93fe49c65ee70b722764803767" class="" alt="">
+            <div class="card-body d-flex flex-column pb-3 pt-3">
+
+
+
+                <div class="d-flex align-items-start">
+                    <h5 class="card-title font-weight-bolder mt-0 mb-0 font-size-xmedium"><a href="documents/creation-de-curriculum-vitae.html">Création de CV</a></h5>
+                                            <div class="text-right ml-auto float-right">
+                            <span class="font-size-small mt-0 w-100 float-right text-right nunito">à partir de</span>
+                            <span class="font-size-xmedium service-price text-right w-100 float-right text-color-dark-blue font-weight-bolder">43,00 €</span>
+                        </div>
+                                    </div>
+                <div class="d-flex flex-row">
+
+                    <div>
+                        <p class="card-text mb-0 mt-0 text-color-light-grey font-size-lsmall nunito">4 langues disponibles</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </a>
+</div>            <div class="col-lg-3">
+    <a href="documents/lettre-de-motivation.html">
+        <div class="card one-document-type mb-4 all-transition">
+            <img src="storage/uploads/default/services/document_lettre-290x1827677.png?token=75078ec4aade6370dff16a036de6f145" class="" alt="">
+            <div class="card-body d-flex flex-column pb-3 pt-3">
+
+
+
+                <div class="d-flex align-items-start">
+                    <h5 class="card-title font-weight-bolder mt-0 mb-0 font-size-xmedium"><a href="documents/lettre-de-motivation.html">Lettre de motivation</a></h5>
+                                            <div class="text-right ml-auto float-right">
+                            <span class="font-size-small mt-0 w-100 float-right text-right nunito">à partir de</span>
+                            <span class="font-size-xmedium service-price text-right w-100 float-right text-color-dark-blue font-weight-bolder">32,00 €</span>
+                        </div>
+                                    </div>
+                <div class="d-flex flex-row">
+
+                    <div>
+                        <p class="card-text mb-0 mt-0 text-color-light-grey font-size-lsmall nunito">4 langues disponibles</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </a>
+</div>            <div class="col-lg-3">
+    <a href="documents/pack-cv-lettre-de-motivation.html">
+        <div class="card one-document-type mb-4 all-transition">
+            <img src="storage/uploads/default/services/document_pack-290x182cc63.png?token=3a4885cab5281b3cf0d52edcf42262ac" class="" alt="">
+            <div class="card-body d-flex flex-column pb-3 pt-3">
+
+
+
+                <div class="d-flex align-items-start">
+                    <h5 class="card-title font-weight-bolder mt-0 mb-0 font-size-xmedium"><a href="documents/pack-cv-lettre-de-motivation.html">Pack CV + lettre de motivation</a></h5>
+                                            <div class="text-right ml-auto float-right">
+                            <span class="font-size-small mt-0 w-100 float-right text-right nunito">à partir de</span>
+                            <span class="font-size-xmedium service-price text-right w-100 float-right text-color-dark-blue font-weight-bolder">68,00 €</span>
+                        </div>
+                                    </div>
+                <div class="d-flex flex-row">
+
+                    <div>
+                        <p class="card-text mb-0 mt-0 text-color-light-grey font-size-lsmall nunito">4 langues disponibles</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </a>
+</div>    
+    <div class="col-lg-3">
+        <a href="commander/document-sur-devis.html">
+            <div class="card one-document-type mb-3 all-transition">
+                <img src="imgs/document_devis.png" class="" alt="">
+                <div class="card-body d-flex flex-column pb-3 pt-3">
+
+                    <div class="d-flex align-items-start">
+                        <h5 class="card-title pr-2 font-weight-bolder mt-0 mb-0 font-size-xmedium"><a href="commander/document-sur-devis.html">Document sur devis</a></h5>
+                        <div class="text-right ml-auto float-right">
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <div>
+                            <p class="card-text mb-0 mt-0 text-color-light-grey line-height-medium font-size-lsmall mt-2 mb-1 nunito">Vous n'avez pas trouvé votre type de document ou votre matière ? </p>
                         </div>
                     </div>
                 </div>
-
+            </div>
+        </a>
+    </div>
+</div>                <h3 class="font-size-large w-100 font-weight-bolder text-center mt-3 mb-1"> Comment ça fonctionne ? </h3>
+                <div class="row">
+                    <div class="col-lg-12 pt-1">
+                        <p class="mt-3">
+                            <div>Avec MyStudies.com, nous vous offrons la possibilité de commander différents types de documents. Vous pouvez solliciter nos tuteurs hautement qualifiés pour la rédaction de votre document, ou simplement d’une partie du document. Notre service est disponible du Collège au Doctorat et dans plus de 80 matières.</div><div><br></div><div>Les documents proposés sont : dissertations, exercices, commentaires de textes, fiches de révision, rapports de stage, CV, lettre de motivation. Sachez également que notre service client se tient à votre disposition pour toute demande particulière ou pour étudier la faisabilité d’un document « hors cadre », et n’hésitera pas à vous fournir toutes les informations complémentaires. Pour cela il suffit de cliquer sur « Document sur devis ».</div><div><br></div>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-
-    <script defer src='../www.google.com/recaptcha/api.js'></script>
 
 <div class="container-fluid newsletter-register pt-4 mt-4 pb-4">
 

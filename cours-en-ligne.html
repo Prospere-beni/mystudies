@@ -1,62 +1,3 @@
-
-
-
-<?php
-    
-    include_once('dbconnexion.php');
-
-    
-    
-    if(isset($_POST['submit_1'])){
-    $lastname= $_POST['lastname'];
-    $firstname= htmlspecialchars($_POST["firstname"]);
-    $school_class= htmlspecialchars($_POST["school_class"]);
-    $email=htmlspecialchars($_POST["email"]); 
-    $phone= htmlspecialchars( $_POST["phone"]);
-    $order_id= $_POST["order_id"];
-    $about= $_POST["about"];
-    $message= $_POST["message"];
-
-    //echo $lastname;
-    //echo $firstname;
-    //echo $school_class;
-    //echo $email;
-    //echo $phone;
-    //echo $order_id;
-    //echo $about;
-    //echo $message;
-
-
-    //On insère les données reçues si les champs sont remplis
-    if(!empty($lastname)  && !empty($firstname) && !empty($school_class) && !empty($email)  && !empty($phone) && !empty($order_id) && !empty($about) && !empty($message)){
-                 
-                $sth = $dbco->prepare("
-                    INSERT INTO membres(lastname , firstname , school_class , email , phone , order_id , about , message)
-                    VALUES(:lastname, :firstname, :school_class, :email, :phone, :order_id, :about,:message)");
-
-                    $sth->bindValue(':lastname', $lastname);
-                    $sth->bindValue(':firstname', $firstname);
-                    $sth->bindValue(':school_class', $school_class);
-                    $sth->bindValue(':email',  $email);
-                    $sth->bindValue(':phone', $phone);
-                    $sth->bindValue(':order_id', $order_id);
-                    $sth->bindValue(':about',  $about);
-                    $sth->bindValue(':message',  $message);
-                    $exec  =  $sth->execute();
-                    
-                      //On renvoie l'utilisateur vers la page de remerciement
-                      header("Location:index.html");
-                    
-            }
-
-}
-
-
-   
-    
-?>
-
-
 <!doctype html>
 
 <html lang="fr">
@@ -65,7 +6,6 @@
 <link rel="dns-prefetch" href="index.html">
 <link rel="dns-prefetch" href="http://www.googletagmanager.com/">
 <link rel="dns-prefetch" href="http://cdnjs.cloudflare.com/">
-<link rel="dns-prefetch" href="http://www.google.com/">
 <link rel="dns-prefetch" href="http://www.facebook.com/">
 <link rel="dns-prefetch" href="http://www.instagram.com/">
 <link rel="dns-prefetch" href="http://twitter.com/">
@@ -77,10 +17,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD">
 
-    <title>Contactez-nous ! - MyStudies.com</title>
-<meta name="description" content="Notre &eacute;quipe se tient &agrave; votre disposition pour vous assister ou vous informer. Remplissez le formulaire de contact.">
-<meta name="keywords" content="contact">
-<link rel="canonical" href="contact.html"/>
+    <title>Mystudies - Commander document scolaire ou professionnel sur mesure.</title>
+<meta name="description" content="Mystudies est un service sur mesure d'aide &agrave; la r&eacute;daction par un sp&eacute;cialiste, pour vos devoirs du coll&egrave;ge au Master et pour vos documents professionnels.">
+<meta name="keywords" content="Rémunération, Salaire, Test de salaire, Enquête salariale, Benchmarks de salaires">
+<link rel="canonical" href="cours-en-ligne.html"/>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
@@ -249,13 +189,14 @@
 
                     <div class="ml-0 ml-xl-4 mr-3 collapse navbar-collapse justify-content-start" id="navbarNavAltMarkup">
 
-                        <div class="navbar-nav">
+                         <div class="navbar-nav">
 
                             <a title="Commander un document scolaire" class="all-transition document-service d-flex flex-column nav-item text-color-white font-weight-bold nav-link " href="documents.html">Rédaction académique  </a>
                             <a title="Corriger un document scolaire" class="all-transition correction-service d-flex flex-column nav-item text-color-white font-weight-bold nav-link " href="corrections.html"> Correction et amélioration </a>
                             <a title="Place de marché de documents scolaires" class="all-transition marketplace-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link " href="place-de-marche.html"> Achat/Vente de documents </a>
                             <a title="Cours en ligne" href="cours-en-ligne.html" class="all-transition course-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link ">Cours particuliers en ligne </a>
                         </div>
+
                     </div>
 
                 </nav>
@@ -267,18 +208,27 @@
                             <img src="imgs/flag_fr.png" style="margin-top: -4px;" class="ml-2 icon-top-header" alt="">
                             <a href="#" id="language" data-toggle="dropdown" class="all-transition font-size-medium font-weight-bold ml-1 dropdown-toggle" aria-haspopup="true" aria-expanded="false"> </a>
                             <div class="dropdown-menu" aria-labelledby="language">
-                                <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+                                                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
                                     <input name="language_id" type="hidden" value="1"> 
 
-                                    <div data-toggle="popover" data-placement="top" data-content="Under development">
-                                    <button class="all-transition disabled  dropdown-item active"><img src="imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
+
+                                                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
+                                            <button class="all-transition disabled  dropdown-item active"><img src="imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
+
+                                    
                                     </form>
 
-                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+                                                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
                                     <input name="language_id" type="hidden" value="2"> 
-                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
+
+
+                                                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
                                             <button class="all-transition disabled  dropdown-item "><img src="imgs/flag_en.png" class="mr-1 mb-1" alt=""> Anglais</button> </div>
+
+                                    
                                     </form>
+
+                                
                             </div>
                         </div>
                     </div>
@@ -315,121 +265,267 @@
             </div>
 </header>
 
-    <div class="container-fluid bg-contact pb-3">
+
+
+    <div class="container-fluid bg-courses2">
+
         <div class="container pt-3">
-            <div class="content-main-title pb-2">
+
+            <div class="content-main-title pb-0">
+
                 <div class="d-flex flex-column align-items-center">
-                    <div class="text-center w-100">
-                        <h3 class="text-color-blue text-center mt-0 mb-0 nunito font-weight-bolder font-size-xxlarge">Contactez-nous </h3>
-                        <span class="font-size-normal text-dark font-size-large"> Notre équipe se tient à votre disposition pour vous assister ou vous informer.  </span>
-                    </div>
+
+                    <h3 class="font-size-large text-color-pink mb-0 mt-0 font-weight-bolder"> Cours en ligne instantanés ou sur réservation </h3>
+
+                    <h2 class="font-size-xlarge mb-1"> Obtenez de l'aide immédiatement ou réserver un cours particulier en ligne. </h2>
+
+                    <span class="font-size-normal"><i class="fal fa-check"></i> Professeurs diplômés &nbsp;|&nbsp; <i class="fal fa-check"></i> Cours téléchargeables &nbsp;|&nbsp; <i class="fal fa-check"></i> Choisissez votre professeur &nbsp;|&nbsp; <i class="fal fa-check"></i> 2 première minutes gratuites &nbsp;|&nbsp; <i class="fal fa-check"></i> Changer de professeur quand vous le souhaitez </span>
+
                 </div>
+
             </div>
+
+        </div>
+
+        <div class="container pt-4 mt-3 pb-2">
+
             <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="card mt-3">
-                        <div class="card-body pt-0">
-                            <div class="row">
-                                <div class="col-lg-12 px-4 pb-3 pt-2">
-                                    <div class="d-flex flex-column mt-3 pt-2 align-items-center">
-                                        <img src="imgs/icon-mail.png" class="pt-1" alt="">
-                                        <h3 class="text-center font-weight-bolder mt-2 pt-1 pb-0 mb-0 font-size-large"> Formulaire de contact </h3>
+
+                <div class="col-lg-12 pb-2 mb-4">
+
+                    <div class="row">
+
+                        <div class="col-lg-6">
+
+                            <div class="d-flex flex-column align-items-center">
+
+                                <form method="POST" action="https://www.mystudies.com/" accept-charset="UTF-8" class="pt-0 mb-4 w-100" enctype="multipart/form-data"><input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+
+                                <div class="row d-flex flex-column">
+
+                                    <div class="col-lg-12 text-left">
+
+                                        <h2 class="text-color-pink font-size-large font-weight-bolder"> Quel est votre niveau scolaire ? </h2>
+
+                                        <select class="form-control form-shadow input-large select2-large select2-single-large" name="level"><option selected="selected" value="">Sélectionnez la matière du cours</option><option value="0">Collège</option><option value="1">Lycée</option></select> 
+
+                                        <a href="#" class="text-dark font-size-normal w-100 float-left text-color-blue font-weight-normal mt-2"> Afin de vous proposer un professeur adapté à votre niveau. </a>
+
                                     </div>
-                                    <form method="POST" action="https://www.mystudies.com/contact" accept-charset="UTF-8" class="pt-4 px-2 mb-0 ajax-form" enctype="multipart/form-data" autocomplete="off"><input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Vous êtes <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><select data-target="level" class="form-control input-medium select2-medium select-collapse select2-single" required name="type"><option selected="selected" value="">Sélectionnez un choix dans la liste</option><option value="student">Étudiant</option><option value="tutor">Tuteur</option><option value="parent">Parent</option><option value="other">Autre</option></select> 
+
+                                    <div class="col-lg-12 mt-4 text-left">
+
+                                        <h2 class="text-color-pink font-size-large font-weight-bolder"> Dans quelle matière souhaitez-vous de l'aide ? </h2>
+
+                                        <select class="form-control form-shadow input-large select2-large select2-single-large" name="level"><option selected="selected" value="">Sélectionnez la matière du cours</option><option value="0">Anglais</option><option value="1">Mathématiques</option></select> 
+
+                                        <a href="#" data-toggle="modal" data-target="#modalAddSubject" class="text-dark font-size-normal w-100 float-left text-color-blue font-weight-normal mt-2"> Votre matière n'est pas présente ? Cliquez
+                                            ici pour nous la proposer !</a>
+
+                                        <div class="modal fade" id="modalAddSubject" role="dialog">
+
+                                            <div class="modal-dialog" role="document">
+
+                                                <div class="modal-content">
+
+                                                    <div class="modal-header">
+
+                                                        <h5 class="modal-title font-weight-bolder"> Votre matière n'est pas présente ? </h5>
+
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+
+                                                    </div>
+
+                                                    <div class="modal-body">
+
+                                                        <form method="POST" action="https://www.mystudies.com/" accept-charset="UTF-8" class="pt-0 mb-0" enctype="multipart/form-data"><input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+
+                                                        <div class="row">
+
+                                                            <div class="col-lg-12">
+
+                                                                <div class="form-group row">
+                                                                    <label class="d-flex align-items-center mb-0 pb-0 col-lg-12"> Indiquez-nous le nom de la matière manquante : </label>
+                                                                    <div class="col-lg-12"><input class="form-control input-medium" name="class" type="text"> 
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="col-lg-12">
+                                                                <a href="#" class="btn btn-blue font-size-large font-weight-bolder  w-100 mt-0"> <i class="fas fa-check"></i> Envoyer </a>
+                                                            </div>
+
+                                                            </form>
+
+                                                        </div>
+
+                                                    </div>
+
                                                 </div>
+
                                             </div>
+
                                         </div>
 
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Nom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="lastname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Prénom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="firstname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12 collapse level option-student">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Niveau/classe <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" placeholder="Ex : Licence 1ère année Histoire" name="school_class" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Adresse email <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" required name="email" type="email"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Téléphone (facultatif)</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="phone" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> N° commande</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="order_id" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Sujet de votre demande </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="about" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 pb-0 col-lg-12"> Message <span class="ml-1 font-size-medium text-color-red">*</span></label>
-                                                <div class="col-lg-12"><textarea rows="6" class="form-control input-medium" required name="message" cols="50"></textarea> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="form-group row">
-                                                <div class="d-flex align-items-center mb-0 pb-0 col-lg-12">
-                                                    <div data-sitekey="6LdNhZQUAAAAAHC3wPkYGOTjDU0EqMZgLeJfoodd" class="g-recaptcha"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <button class="btn mt-3 float-left font-size-large font-weight-bolder btn-blue w-100" name="submit_1" type="submit_1" value="submit_1">Envoyer le message</button>
-                                        </div>
                                     </div>
+
+                                    <div class="w-100 d-flex justify-content-start ml-3 pt-0 mt-4">
+
+                                        <a href="cours-en-ligne/cours-immediat.html" class="btn btn-order hvr-icon-wobble-horizontal pink mt-0 pl-4 btn-bolt font-size-xmedium font-weight-bolder"> <i class="fas ml-3 fa-bolt"></i>
+                                            Cours immédiat disponible <i class="fas fa-angle-right hvr-icon"></i></a>
+
+                                        <a href="cours-en-ligne/cours-reservation.html" class="btn btn-order hvr-icon-wobble-horizontal ml-3 pink mt-0 font-size-xmedium font-weight-bolder"> <i class="fas fa-calendar-alt"></i>
+                                            Réserver un cours <i class="fas fa-angle-right hvr-icon"></i></a>
+
+                                    </div>
+
                                 </div>
+
                                 </form>
+
                             </div>
+
+                        </div>
+
+                        <div class="col-lg-6 mt-3">
+
+                            <div class="p-5 btn-rounded bg-stat-stream">
+
+                                <h5 class="text-dark font-weight-bolder "><i class="fas fa-comments mr-1"></i> Quelques témoignages</h5>
+
+                                <div id="carouselExampleIndicators" class="carousel slide">
+                                    <div class="carousel-inner d-flex mt-4">
+
+                                        <div class="carousel-item active">
+                                            <p class="font-size-medium text-left font-weight-light font-italic">“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim  ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”</p>
+                                            <div class="d-flex flex-wrap pt-2 justify-content-start">
+                                                <span class="font-weight-bold">Jean T</span>
+                                                <span class="font-weight-light ml-2">| </span>
+                                                <span class="font-weight-light ml-2">Etudiant en informatique</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <ol class="carousel-indicators mb-0 pt-3 ml-0 pl-0 d-flex justify-content-start mt-4">
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="" class="active"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="" class=""></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="" class=""></li>
+                                    </ol>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6 mb-4">
+
+                    <div class="card card-shadow">
+
+
+                        <div class="card-body px-xl-5 px-4 d-flex flex-column align-items-center pt-4 card-skill">
+
+                            <img src="imgs/bolt_stream.png" class=" pr-0 mt-2 mb-2" alt="">
+
+                            <h5 class="card-title font-size-xlarge font-weight-bolder text-color-pink text-center">Cours immédiat</h5>
+
+                            <span class="font-size-xmedium mt-1 mb-1 line-height-medium  font-weight-bolder text-center">Demander l'aide d'un professeur disponible en quelques minutes seulement.</span>
+
+                            <p class="card-text text-center font-size-normal mt-3">
+
+                                Mystudies.com vous offre désormais la possibilité
+                                d’obtenir l’aide de l’un de nos professeurs en 2
+                                minutes tous les jours de 8h à minuit.
+
+                                <br/>
+
+                                Connectez-vous sur Mystudies.com, posez votre question
+                                et un de nos professeurs vous répondra.
+
+                            </p>
+
+                            <div class="text-center mt-0 mb-3 w-100 float-left text-dark line-height-large">
+
+                                <ul class="list-group w-100 float-left list-group-flush">
+
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-clock"></i></span> <span>Cours de <b>15 minutes minimum</b>.</span>
+                                    </li>
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-coffee"></i></span> <span
+                                                class="text-color-pink font-weight-bolder"> Les 2 premières minutes sont gratuites ! </span></li>
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-bolt"></i></span> <span><b>Cours immédiat</b> avec l'un des professeurs en ligne.</span>
+                                    </li>
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-download"></i></span> <span>Cours téléchargeable à la fin de la séance.</span>
+                                    </li>
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-graduation-cap"></i></span> <span>Choisissez votre professeur.</span>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+
                         </div>
                     </div>
+
+                </div>
+
+                <div class="col-lg-6 mb-4">
+
+                    <div class="card card-shadow">
+
+                        <div class="card-body px-xl-5 px-4 d-flex flex-column align-items-center pt-4 card-skill">
+
+                            <img src="imgs/calendar_stream.png" class=" pr-0 pt-1 mt-2 mb-1" alt="">
+
+                            <h5 class="card-title font-size-xlarge font-weight-bolder text-color-pink text-center"> Cours sur réservation </h5>
+                            <span class="font-size-xmedium mt-1 mb-1  line-height-medium font-weight-bolder text-center"> Vous avez besoin d'une réponse détaillée et complète à un problème général ? </span>
+
+                            <p class="card-text text-center font-size-normal mt-3"> Avec Mystudies.com, vous pouvez maintenant
+                                réserver un cours particulier avec l’un de nos professeurs. Il vous aidera aussi bien dans vos révisions, dans la réalisation de vos devoirs ou la préparation d’examens et concours.
+                                N’hésitez pas à lui poser toutes vos questions, nos professeurs sont là pour vous aider.
+                            </p>
+
+                            <div class="text-center w-100 float-left mt-0 mb-3 text-dark line-height-large">
+
+                                <ul class="list-group w-100 float-left list-group-flush">
+
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-clock"></i></span> <span>Cours de 30 minutes minimum.</span>
+                                    </li>
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-calendar-alt"></i></span> <span>Réservation <b>12 heures à l'avance</b>.</span>
+                                    </li>
+
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-highlighter"></i></span> <span>Cours préparé à l'avance <b>en fonction de vos besoins</b>.</span>
+                                    </li>
+
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-download"></i></span> <span>Cours téléchargeable à la fin de la séance.</span>
+                                    </li>
+
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-graduation-cap"></i></span> <span>Choisissez votre professeur.</span>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
+
         </div>
+
     </div>
 
-
-    <script defer src='../www.google.com/recaptcha/api.js'></script>
+    
 
 <div class="container-fluid newsletter-register pt-4 mt-4 pb-4">
 
@@ -439,7 +535,7 @@
 
             <div class="col-12 text-sm-left text-center col-sm-7">
                 <span class="font-weight-light text-sm-right text-center float-sm-right font-size-larger mt-1">
-                                            <span class="font-weight-bolder">Ne manquez plus nos promos et bénéficiez jusqu’à 50% de réduction</span> une fois par semaine à travers :                                    </span>
+                <span class="font-weight-bolder">Ne manquez plus nos promos et bénéficiez jusqu’à 50% de réduction</span> une fois par semaine à travers :                                    </span>
             </div>
 
             <div class="col-12 mt-sm-0 mt-3 col-sm-3">

@@ -1,71 +1,12 @@
-
-
-
-<?php
-    
-    include_once('dbconnexion.php');
-
-    
-    
-    if(isset($_POST['submit_1'])){
-    $lastname= $_POST['lastname'];
-    $firstname= htmlspecialchars($_POST["firstname"]);
-    $school_class= htmlspecialchars($_POST["school_class"]);
-    $email=htmlspecialchars($_POST["email"]); 
-    $phone= htmlspecialchars( $_POST["phone"]);
-    $order_id= $_POST["order_id"];
-    $about= $_POST["about"];
-    $message= $_POST["message"];
-
-    //echo $lastname;
-    //echo $firstname;
-    //echo $school_class;
-    //echo $email;
-    //echo $phone;
-    //echo $order_id;
-    //echo $about;
-    //echo $message;
-
-
-    //On insère les données reçues si les champs sont remplis
-    if(!empty($lastname)  && !empty($firstname) && !empty($school_class) && !empty($email)  && !empty($phone) && !empty($order_id) && !empty($about) && !empty($message)){
-                 
-                $sth = $dbco->prepare("
-                    INSERT INTO membres(lastname , firstname , school_class , email , phone , order_id , about , message)
-                    VALUES(:lastname, :firstname, :school_class, :email, :phone, :order_id, :about,:message)");
-
-                    $sth->bindValue(':lastname', $lastname);
-                    $sth->bindValue(':firstname', $firstname);
-                    $sth->bindValue(':school_class', $school_class);
-                    $sth->bindValue(':email',  $email);
-                    $sth->bindValue(':phone', $phone);
-                    $sth->bindValue(':order_id', $order_id);
-                    $sth->bindValue(':about',  $about);
-                    $sth->bindValue(':message',  $message);
-                    $exec  =  $sth->execute();
-                    
-                      //On renvoie l'utilisateur vers la page de remerciement
-                      header("Location:index.html");
-                    
-            }
-
-}
-
-
-   
-    
-?>
-
-
 <!doctype html>
 
 <html lang="fr">
+
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-<link rel="dns-prefetch" href="index.html">
+<link rel="dns-prefetch" href="../index.html">
 <link rel="dns-prefetch" href="http://www.googletagmanager.com/">
 <link rel="dns-prefetch" href="http://cdnjs.cloudflare.com/">
-<link rel="dns-prefetch" href="http://www.google.com/">
 <link rel="dns-prefetch" href="http://www.facebook.com/">
 <link rel="dns-prefetch" href="http://www.instagram.com/">
 <link rel="dns-prefetch" href="http://twitter.com/">
@@ -77,10 +18,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD">
 
-    <title>Contactez-nous ! - MyStudies.com</title>
-<meta name="description" content="Notre &eacute;quipe se tient &agrave; votre disposition pour vous assister ou vous informer. Remplissez le formulaire de contact.">
-<meta name="keywords" content="contact">
-<link rel="canonical" href="contact.html"/>
+    <title>Mystudies - Commander document scolaire ou professionnel sur mesure.</title>
+<meta name="description" content="Mystudies est un service sur mesure d'aide &agrave; la r&eacute;daction par un sp&eacute;cialiste, pour vos devoirs du coll&egrave;ge au Master et pour vos documents professionnels.">
+<meta name="keywords" content="Rémunération, Salaire, Test de salaire, Enquête salariale, Benchmarks de salaires">
+<link rel="canonical" href="vendre-un-document.html"/>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
@@ -90,10 +31,10 @@
     <meta name="trustpilot-one-time-domain-verification-id" content="RC4VGMaIeTMEm6a8JSEkdYVUHZ4HMsXFxvkuw1Rr"/>
     <meta name="google-site-verification" content="3F68zubcrYaAzWeXPgiNixnjGXVdFyMWPaoinXO-U4w"/>
 
-    <link rel="shortcut icon" href="imgs/fav.png" type="image/x-icon">
-    <link rel="icon" href="imgs/fav.png" type="image/x-icon">
-    <link rel="preload" href="css/app66a7.css?id=63fde31c37b4743ec018" as="style">
-    <link rel="stylesheet" href="css/app66a7.css?id=63fde31c37b4743ec018"/>
+    <link rel="shortcut icon" href="../imgs/fav.png" type="image/x-icon">
+    <link rel="icon" href="../imgs/fav.png" type="image/x-icon">
+    <link rel="preload" href="../css/app66a7.css?id=63fde31c37b4743ec018" as="style">
+    <link rel="stylesheet" href="../css/app66a7.css?id=63fde31c37b4743ec018"/>
 
     <script defer src="https://www.googletagmanager.com/gtag/js?id=UA-100948456-5"></script>
 
@@ -117,8 +58,8 @@
         gtag('config', 'UA-135049529-1');
     </script>
 
-    <script defer type="text/javascript" src="../widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"></script>
-    <script defer type="text/javascript" src="../cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+    <script defer type="text/javascript" src="../../widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"></script>
+    <script defer type="text/javascript" src="../../cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 </head>
 
 <body>
@@ -241,21 +182,22 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                                            <a class="navbar-brand d-none d-sm-block logo-large" href="index.html"><img src="imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a>
-                         <a class="navbar-brand d-block d-sm-none logo-large" href="index.html"><img src="imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a>
+                                            <a class="navbar-brand d-none d-sm-block logo-large" href="../index.html"><img src="../imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a>
+                         <a class="navbar-brand d-block d-sm-none logo-large" href="../index.html"><img src="../imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a>
                     
-                    <div class="d-none d-sm-block"> <a class="navbar-brand logo-min" href="index.html"><img src="imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a> </div>
-                     <div class="d-block d-sm-none"> <a class="navbar-brand logo-min" href="index.html"><img src="imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a> </div>
+                    <div class="d-none d-sm-block"> <a class="navbar-brand logo-min" href="../index.html"><img src="../imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a> </div>
+                     <div class="d-block d-sm-none"> <a class="navbar-brand logo-min" href="../index.html"><img src="../imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a> </div>
 
                     <div class="ml-0 ml-xl-4 mr-3 collapse navbar-collapse justify-content-start" id="navbarNavAltMarkup">
 
                         <div class="navbar-nav">
 
-                            <a title="Commander un document scolaire" class="all-transition document-service d-flex flex-column nav-item text-color-white font-weight-bold nav-link " href="documents.html">Rédaction académique  </a>
-                            <a title="Corriger un document scolaire" class="all-transition correction-service d-flex flex-column nav-item text-color-white font-weight-bold nav-link " href="corrections.html"> Correction et amélioration </a>
-                            <a title="Place de marché de documents scolaires" class="all-transition marketplace-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link " href="place-de-marche.html"> Achat/Vente de documents </a>
-                            <a title="Cours en ligne" href="cours-en-ligne.html" class="all-transition course-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link ">Cours particuliers en ligne </a>
+                            <a title="Commander un document scolaire" class="all-transition document-service d-flex flex-column nav-item text-color-white font-weight-bold nav-link " href="../documents.html">Rédaction académique <span class="soon-text font-italic font-size-xsmall">Dissertation, mémoire, dossier, CV</span> </a>
+                            <a title="Corriger un document scolaire" class="all-transition correction-service d-flex flex-column nav-item text-color-white font-weight-bold nav-link " href="../corrections.html"> Correction et amélioration <span class="soon-text font-italic font-size-xsmall">Exercice, thèse, commentaire, DM</span></a>
+                            <a title="Place de marché de documents scolaires" class="all-transition marketplace-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link active" href="../place-de-marche.html"> Achat/Vente de documents <span class="soon-text  font-italic font-size-xsmall">Devoirs, fiches, annale, DS…</span></a>
+                            <a title="Cours en ligne" href="../cours-en-ligne.html" class="all-transition course-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link ">Cours particuliers en ligne <span class="soon-text font-italic font-size-xsmall">Cours immédiat ou sur réservation</span></a>
                         </div>
+
                     </div>
 
                 </nav>
@@ -264,21 +206,30 @@
                     <div class="text-top-header top-header-right select-language ml-4 mr-4 ">
 
                         <div class="dropdown dropleft drop-language">
-                            <img src="imgs/flag_fr.png" style="margin-top: -4px;" class="ml-2 icon-top-header" alt="">
+                            <img src="../imgs/flag_fr.png" style="margin-top: -4px;" class="ml-2 icon-top-header" alt="">
                             <a href="#" id="language" data-toggle="dropdown" class="all-transition font-size-medium font-weight-bold ml-1 dropdown-toggle" aria-haspopup="true" aria-expanded="false"> </a>
                             <div class="dropdown-menu" aria-labelledby="language">
-                                <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+                                                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
                                     <input name="language_id" type="hidden" value="1"> 
 
-                                    <div data-toggle="popover" data-placement="top" data-content="Under development">
-                                    <button class="all-transition disabled  dropdown-item active"><img src="imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
+
+                                                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
+                                            <button class="all-transition disabled  dropdown-item active"><img src="../imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
+
+                                    
                                     </form>
 
-                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+                                                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
                                     <input name="language_id" type="hidden" value="2"> 
-                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
-                                            <button class="all-transition disabled  dropdown-item "><img src="imgs/flag_en.png" class="mr-1 mb-1" alt=""> Anglais</button> </div>
+
+
+                                                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
+                                            <button class="all-transition disabled  dropdown-item "><img src="../imgs/flag_en.png" class="mr-1 mb-1" alt=""> Anglais</button> </div>
+
+                                    
                                     </form>
+
+                                
                             </div>
                         </div>
                     </div>
@@ -286,12 +237,12 @@
                     
                         <div class="text-top-header top-header-right mr-2">
 
-                            <a style="margin-top: -1px;" href="devenir-tuteur-correcteur.html" class="btn d-none d-sm-block btn-secondary font-size-normal text-white full-rounded dark px-3 hvr-icon-wobble-horizontal font-weight-bold">
+                            <a style="margin-top: -1px;" href="../devenir-tuteur-correcteur.html" class="btn d-none d-sm-block btn-secondary font-size-normal text-white full-rounded dark px-3 hvr-icon-wobble-horizontal font-weight-bold">
                                 <i class="fas font-size-medium ml-0 mr-1 fa-graduation-cap"></i>
                                 <span class="mr-1 font-weight-bold">Devenir tuteur</span>
                             </a>
 
-                            <a style="margin-top: -1px;padding: 4px 5.5px !important;" href="devenir-tuteur-correcteur.html" class="btn ml-1 d-sm-none d-block btn-secondary font-size-normal text-white full-rounded dark px-2 hvr-icon-wobble-horizontal font-weight-bold">
+                            <a style="margin-top: -1px;padding: 4px 5.5px !important;" href="../devenir-tuteur-correcteur.html" class="btn ml-1 d-sm-none d-block btn-secondary font-size-normal text-white full-rounded dark px-2 hvr-icon-wobble-horizontal font-weight-bold">
                                 <i class="fas font-size-medium ml-0 mr-0 fa-graduation-cap"></i>
                             </a>
 
@@ -300,8 +251,8 @@
                     
                     
                         <div class="ml-0">
-                            <a href="connexion.php" class="btn btn-blue d-none d-sm-block full-rounded blue font-size-normal px-3 hvr-icon-wobble-horizontal font-weight-bold"><i class="fas font-size-medium ml-0 mr-1 fa-user"></i> Connexion</a>
-                            <a style="padding: 4px 8px !important;" href="connexion.php" class="btn btn-blue d-sm-none d-block full-rounded blue font-size-normal px-3 hvr-icon-wobble-horizontal font-weight-bold"><i class="fas font-size-medium ml-0 mr-0 fa-user"></i> </a>
+                            <a href="../connexion.php" class="btn btn-blue d-none d-sm-block full-rounded blue font-size-normal px-3 hvr-icon-wobble-horizontal font-weight-bold"><i class="fas font-size-medium ml-0 mr-1 fa-user"></i> Connexion</a>
+                            <a style="padding: 4px 8px !important;" href="../connexion.php" class="btn btn-blue d-sm-none d-block full-rounded blue font-size-normal px-3 hvr-icon-wobble-horizontal font-weight-bold"><i class="fas font-size-medium ml-0 mr-0 fa-user"></i> </a>
                         </div>
 
                     
@@ -315,121 +266,158 @@
             </div>
 </header>
 
-    <div class="container-fluid bg-contact pb-3">
+
+
+    <div class="container-fluid pb-0">
+
         <div class="container pt-3">
-            <div class="content-main-title pb-2">
+
+            <div class="content-main-title pb-0">
+
                 <div class="d-flex flex-column align-items-center">
-                    <div class="text-center w-100">
-                        <h3 class="text-color-blue text-center mt-0 mb-0 nunito font-weight-bolder font-size-xxlarge">Contactez-nous </h3>
-                        <span class="font-size-normal text-dark font-size-large"> Notre équipe se tient à votre disposition pour vous assister ou vous informer.  </span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="card mt-3">
-                        <div class="card-body pt-0">
-                            <div class="row">
-                                <div class="col-lg-12 px-4 pb-3 pt-2">
-                                    <div class="d-flex flex-column mt-3 pt-2 align-items-center">
-                                        <img src="imgs/icon-mail.png" class="pt-1" alt="">
-                                        <h3 class="text-center font-weight-bolder mt-2 pt-1 pb-0 mb-0 font-size-large"> Formulaire de contact </h3>
+
+                    <div class="ml-0 text-left w-100">
+
+                        <h3 class="text-dark text-center font-weight-light mt-0 mb-2 nunito font-size-xxlarge"> Vendez vos documents scolaires déjà rendus <span class="font-weight-bolder">pour aider d'autres étudiants</span></h3>
+
+                        <h5 class="font-size-xmedium w-100 text-center mb-2 pb-4"> <span class="font-weight-bolder">Et gagnez 3€ à chaque vente</span> d'un de vos documents sur notre place de marché ! </h5>
+
+                        <div class="d-flex justify-content-center">
+
+                            <img src="../imgs/img-sell.jpg" class="mt-0 pr-4 pl-5" alt="">
+
+                            <div class="d-flex pl-5 pr-5 w-100 flex-column">
+
+                                <h3 class="font-weight-bolder mt-3 pt-1"> Par où commencer ? </h3>
+
+                                <div class="content-steps-docs mt-3">
+
+                                    <div class="line-steps-docs"></div>
+
+                                    <div class="content-one-step-docs d-flex align-items-center mt-4 pt-1">
+                                        <span class="number font-weight-bolder">1</span>
+                                        <h5 class="mb-0 pl-5 "> Je crée un compte <span class="font-weight-bolder text-color-dark-blue">gratuitement et en quelques minutes</span> sur Mystudies.com en <a class="text-color-dark-blue font-weight-bolder" href="../connexion.html"><u>cliquant ici.</u></a></h5>
                                     </div>
-                                    <form method="POST" action="https://www.mystudies.com/contact" accept-charset="UTF-8" class="pt-4 px-2 mb-0 ajax-form" enctype="multipart/form-data" autocomplete="off"><input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Vous êtes <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><select data-target="level" class="form-control input-medium select2-medium select-collapse select2-single" required name="type"><option selected="selected" value="">Sélectionnez un choix dans la liste</option><option value="student">Étudiant</option><option value="tutor">Tuteur</option><option value="parent">Parent</option><option value="other">Autre</option></select> 
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Nom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="lastname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Prénom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="firstname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12 collapse level option-student">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Niveau/classe <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" placeholder="Ex : Licence 1ère année Histoire" name="school_class" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Adresse email <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" required name="email" type="email"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Téléphone (facultatif)</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="phone" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> N° commande</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="order_id" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Sujet de votre demande </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="about" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 pb-0 col-lg-12"> Message <span class="ml-1 font-size-medium text-color-red">*</span></label>
-                                                <div class="col-lg-12"><textarea rows="6" class="form-control input-medium" required name="message" cols="50"></textarea> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="form-group row">
-                                                <div class="d-flex align-items-center mb-0 pb-0 col-lg-12">
-                                                    <div data-sitekey="6LdNhZQUAAAAAHC3wPkYGOTjDU0EqMZgLeJfoodd" class="g-recaptcha"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <button class="btn mt-3 float-left font-size-large font-weight-bolder btn-blue w-100" name="submit_1" type="submit_1" value="submit_1">Envoyer le message</button>
-                                        </div>
+                                    <div class="content-one-step-docs d-flex align-items-center mt-4 pt-1">
+                                        <span class="number font-weight-bolder">2</span>
+                                        <h5 class="mb-0 pl-5"> Depuis mon espace personnel, je télécharge les <span class="font-weight-bolder text-color-dark-blue">documents que je souhaite mettre en vente</span> sur Mystudies.com.</h5>
                                     </div>
+
+                                    <div class="content-one-step-docs d-flex align-items-center mt-4 pt-1">
+                                        <span class="number font-weight-bolder">3</span>
+                                        <h5 class="mb-0 pl-5"> Depuis mon espace personnel, <span class="font-weight-bolder text-color-dark-blue">je surveille mes ventes</span> et je peux demander un <span class="font-weight-bolder text-color-dark-blue">versement bancaire à tout moment !</span> </h5>
+                                    </div>
+
+
                                 </div>
-                                </form>
+
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
 
             </div>
+
         </div>
+
+    </div>
+
+    <div class="container-fluid content-stats-marketplace pt-2 pb-3">
+
+        <div class="container pt-3">
+
+            <h5 class="font-weight-bolder mt-3 text-dark font-size-large text-center">En moyenne nos vendeurs :</h5>
+
+            <div class="mt-4 mb-0 pb-4">
+
+                <div class="row d-flex justify-content-center">
+
+                    <div class="col-lg-2">
+
+                        <div class="card card-body">
+
+                            <div class="d-flex flex-column align-items-center">
+
+                                <img src="../imgs/icon-pig.png" class="mb-2" alt="">
+
+                                <span class="font-size-medium mt-2 font-weight-bolder">Gagnent</span>
+                                <span class="font-size-large font-weight-bolder">216 €</span>
+                                <span class="font-size-small text-center">Par mois.</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-2">
+
+                        <div class="card card-body">
+
+                            <div class="d-flex flex-column align-items-center">
+
+                                <img src="../imgs/icon-cart-48.png" class="mb-2" alt="">
+
+                                <span class="font-size-medium mt-2 font-weight-bolder">Réalisent</span>
+                                <span class="font-size-large font-weight-bolder">43.2</span>
+                                <span class="font-size-small text-center">Ventes par mois.</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-2">
+
+                        <div class="card  card-body">
+
+                            <div class="d-flex flex-column align-items-center">
+
+                                <img src="../imgs/icon-doc-order.png" class="mb-2" alt="">
+
+                                <span class="font-size-medium mt-2 font-weight-bolder">Possèdent</span>
+                                <span class="font-size-large font-weight-bolder">14.4</span>
+                                <span class="font-size-small text-center">Documents en vente.</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+                </div>
+
+                <h6 class="text-center font-size-large font-weight-bolder mt-5 pt-2">Rejoignez la plus grande place de marché en ligne lié aux documents académiques.</h6>
+
+                    <div class="d-flex flex-wrap flex-row justify-content-center list-btn-skill mt-4 mb-0">
+
+                        <a href="../connexion.html" class="btn btn-dark font-weight-bolder font-size-xmedium  font-underline"> S'inscrire sur Mystudies.com </a>
+
+                    </div>
+
+
+            </div>
+
+
+
+        </div>
+
     </div>
 
 
-    <script defer src='../www.google.com/recaptcha/api.js'></script>
+
+
+
 
 <div class="container-fluid newsletter-register pt-4 mt-4 pb-4">
 
@@ -444,6 +432,7 @@
 
             <div class="col-12 mt-sm-0 mt-3 col-sm-3">
 
+              
                 <div class="d-flex flex-grow-1 justify-content-center justify-content-sm-start">
 
                     <a href="#" data-toggle="modal" data-target="#modalEmailNewsletter" class=""> <img src="imgs/icon-mail-nl.png" style="margin-top:-1px;" class="" alt=""> </a>
@@ -506,14 +495,14 @@
     <div class="container pt-4 pb-4">
         <div class="row pt-2 pb-3">
             <div class="col-lg-4 col-12 col-sm-6">
-                <img src="imgs/logo_2.png" class="logo-footer mt-1" alt="">
+                <img src="../imgs/logo_2.png" class="logo-footer mt-1" alt="">
                 <p class="font-size-medium  pr-sm-5 font-weight-semibold pt-2 mt-4 mb-2 mb-sm-4  pb-3 text-color-light-grey">MyStudies.com a pour unique but d'aider les étudiants à progresser durant leurs études. Les documents commandés sur MyStudies.com sont des modèles qui doivent être utilisés en référence appropriée et qui ne peuvent donc pas être rendus en l’état à un établissement scolaire ou universitaire.</p>
                 <span class="font-weight-bolder text-uppercase mt-4 pt-3 pb-3 font-size-xmedium text-white"> <b> Contact et support</b>  </span>
                 <div class="font-size-normal mt-xl-1 mt-md-2 pt-3 d-flex flex-column">
-                    <div class="mb-2"><span class="text-color-light-grey font-weight-semibold"><i class="fas fa-life-ring"></i> Contactez-nous: </span> <a href="contact.php"
-                        class="text-color-light-blue ml-2 font-weight-semibold">Formulaire de contact</a>
+                    <div class="mb-2"><span class="text-color-light-grey font-weight-semibold"><i class="fas fa-life-ring"></i> Contactez-nous: </span> <a href="../contact.html"
+                                class="text-color-light-blue ml-2 font-weight-semibold">Formulaire de contact</a>
                     </div>
-                    <div class="mb-2"><span class="text-color-light-grey font-weight-semibold"><i class="fas fa-envelope-open"></i> Email : </span> <a href="#"
+                    <div class="mb-2"><span class="text-color-light-grey font-weight-semibold"><i class="fas fa-envelope-open"></i> Email : </span> <a href="mailto:info@mystudies.com"
                                 class="text-color-light-blue ml-2 font-weight-semibold">info@mystudies.com</a>
 
                     </div>
@@ -523,60 +512,58 @@
 
                 <span class="font-weight-bolder d-flex mb-4 text-uppercase font-size-xmedium text-white"><b> Articles de notre blog </b></span>
 
-                        <div class="one-article-footer mb-3">
+                                    <div class="one-article-footer mb-3">
                         <div class="d-flex">
-                            <div class="photo"> <img src="storage/uploads/blog_posts/27/5d7a69bc93ff1-70x70cf85.jpg?token=268eea0bba03a1b04b821861df853c54">  </div>
+                            <div class="photo"> <img src="../storage/uploads/blog_posts/27/5d7a69bc93ff1-70x70cf85.jpg?token=268eea0bba03a1b04b821861df853c54">  </div>
                             <div class="d-flex flex-grow-1 flex-column">
                                 <div class="text-white d-flex justify-content-between">
-                                    <span class="font-weight-bold mt-sm-2 mt-0 pt-1"><a class="text-white" href="#">Les 12 techniques pour réviser effi...</a></span>
+                                    <span class="font-weight-bold mt-sm-2 mt-0 pt-1"><a class="text-white" href="../blog/aide-aux-examens/les-12-techniques-pour-reviser-efficacement.html">Les 12 techniques pour réviser effi...</a></span>
                                 </div>
                                 <p class="card-text mb-0 mb-1 text-color-light-grey line-height-medium font-size-lsmall nunito">C&#039;est de nouveau la rentrée, vous êtes déterminé.e à réussir votre année mais di...</p>
-                                <a href="#" class="font-size-small text-color-dark-blue nunito"> Voir l'article </a>
+                                <a href="../blog/aide-aux-examens/les-12-techniques-pour-reviser-efficacement.html" class="font-size-small text-color-dark-blue nunito"> Voir l'article </a>
                             </div>
                         </div>
                     </div>
-                        <div class="one-article-footer mb-3">
+                                    <div class="one-article-footer mb-3">
                         <div class="d-flex">
-                            <div class="photo"> 
-                                <img src="storage/uploads/blog_posts/26/5d7a5cd139a15-70x70e22c.jpg?token=c76d869d8d3908e4c0a44c4d92e3230e">  </div>
+                            <div class="photo"> <img src="../storage/uploads/blog_posts/26/5d7a5cd139a15-70x70e22c.jpg?token=c76d869d8d3908e4c0a44c4d92e3230e">  </div>
                             <div class="d-flex flex-grow-1 flex-column">
                                 <div class="text-white d-flex justify-content-between">
-                                    <span class="font-weight-bold mt-sm-2 mt-0 pt-1"><a class="text-white" href="#">Nos astuces pour appréhender au mie...</a></span>
+                                    <span class="font-weight-bold mt-sm-2 mt-0 pt-1"><a class="text-white" href="../blog/aide-a-la-redaction/nos-astuces-pour-apprehender-au-mieux-sa-recherche-de-stage.html">Nos astuces pour appréhender au mie...</a></span>
                                 </div>
                                 <p class="card-text mb-0 mb-1 text-color-light-grey line-height-medium font-size-lsmall nunito">La recherche de stage est souvent perçue par les étudiants comme une étape compl...</p>
-                                <a href="#" class="font-size-small text-color-dark-blue nunito"> Voir l'article </a>
+                                <a href="../blog/aide-a-la-redaction/nos-astuces-pour-apprehender-au-mieux-sa-recherche-de-stage.html" class="font-size-small text-color-dark-blue nunito"> Voir l'article </a>
                             </div>
                         </div>
                     </div>
-                        <div class="one-article-footer mb-3">
+                                    <div class="one-article-footer mb-3">
                         <div class="d-flex">
-                            <div class="photo"> 
-                                <img src="storage/uploads/blog_posts/25/5d3ae56196411-70x70e0b3.jpg?token=23b5a64317556430a2ef40dcf5f69689">  </div>
+                            <div class="photo"> <img src="../storage/uploads/blog_posts/25/5d3ae56196411-70x70e0b3.jpg?token=23b5a64317556430a2ef40dcf5f69689">  </div>
                             <div class="d-flex flex-grow-1 flex-column">
                                 <div class="text-white d-flex justify-content-between">
-                                    <span class="font-weight-bold mt-sm-2 mt-0 pt-1"><a class="text-white" href="#">Comment rédiger un bon CV?</a></span>
+                                    <span class="font-weight-bold mt-sm-2 mt-0 pt-1"><a class="text-white" href="../blog/aide-a-la-redaction/comment-rediger-un-bon-cv.html">Comment rédiger un bon CV?</a></span>
                                 </div>
                                 <p class="card-text mb-0 mb-1 text-color-light-grey line-height-medium font-size-lsmall nunito">À la recherche d&#039;un stage ou d&#039;un premier emploi ? Votre CV va devenir votre mei...</p>
-                                <a href="#" class="font-size-small text-color-dark-blue nunito"> Voir l'article </a>
+                                <a href="../blog/aide-a-la-redaction/comment-rediger-un-bon-cv.html" class="font-size-small text-color-dark-blue nunito"> Voir l'article </a>
                             </div>
                         </div>
                     </div>
                 
-                <a href="blog.html" class="float-left text-center w-100 mt-2 btn btn-dark-grey btn-xsm btn-rounded">Voir tous les articles de notre blog  </a>
+                <a href="../blog.html" class="float-left text-center w-100 mt-2 btn btn-dark-grey btn-xsm btn-rounded">Voir tous les articles de notre blog  </a>
             </div>
             <div class="col-lg-4 app-mobile-col col-12 col-sm-6 pt-3 pl-sm-5">
                 <span class="font-weight-bold d-flex text-uppercase  mb-4 font-size-xmedium text-white"> <b> Liens utiles  </b>  </span>
                 <div class="d-flex justify-content-between flex-row">
 
                     <div class="d-flex flex-column">
-                        <a href="#" class="text-color-light-grey font-size-normal mb-2"> Conditions générales d'utilisation </a>
-                        <a href="cgv.html" class="text-color-light-grey font-size-normal mb-2"> Conditions générales de vente </a>
+                        <a href="../cgu/etudiant.html" class="text-color-light-grey font-size-normal mb-2"> Conditions générales d'utilisation </a>
+                        <a href="../cgv.html" class="text-color-light-grey font-size-normal mb-2"> Conditions générales de vente </a>
                     </div>
 
                     <div class="d-flex flex-column">
                         
-                        <a href="mentions-legales.html" class="text-color-light-grey font-size-normal mb-2"> Mentions légales </a>
-                        <a href="#" class="text-color-light-grey font-size-normal mb-2"> Plan du site XML </a>
+                        <a href="../mentions-legales.html" class="text-color-light-grey font-size-normal mb-2"> Mentions légales </a>
+                        <a href="../sitemap" class="text-color-light-grey font-size-normal mb-2"> Plan du site XML </a>
                     </div>
 
                 </div>
@@ -585,7 +572,7 @@
 
                     <div class="d-flex flex-column">
                         
-                        <a href="place-de-marche/tous-les-documents.html" class="text-color-light-grey font-size-normal mb-2"> Tous nos documents académiques </a>
+                        <a href="tous-les-documents.html" class="text-color-light-grey font-size-normal mb-2"> Tous nos documents académiques </a>
                     </div>
 
                 </div>
@@ -593,21 +580,21 @@
                 <span class="font-weight-bolder d-flex mb-4 mt-4 text-uppercase font-size-xmedium text-white"><b> Catégories de documents </b></span>
                 <div class="d-flex justify-content-between flex-row">
                     <div class="d-flex flex-column">
-                    <a href="documents/document-scolaire.html" class="text-color-light-grey font-size-lsmall mb-2"> Document scolaire et universitaire </a>
-                    <a href="documents/redaction-de-memoire.html" class="text-color-light-grey font-size-lsmall mb-2"> Rédaction de mémoire </a>
-                    <a href="documents/traduction-de-document.html" class="text-color-light-grey font-size-lsmall mb-2"> Traduction de document </a>
-                    <a href="documents/rapport-de-stage.html" class="text-color-light-grey font-size-lsmall mb-2"> Rapport de stage </a>
+                                                    <a href="../documents/document-scolaire.html" class="text-color-light-grey font-size-lsmall mb-2"> Document scolaire et universitaire </a>
+                                                    <a href="../documents/redaction-de-memoire.html" class="text-color-light-grey font-size-lsmall mb-2"> Rédaction de mémoire </a>
+                                                    <a href="../documents/traduction-de-document.html" class="text-color-light-grey font-size-lsmall mb-2"> Traduction de document </a>
+                                                    <a href="../documents/rapport-de-stage.html" class="text-color-light-grey font-size-lsmall mb-2"> Rapport de stage </a>
                                             </div>
                     <div class="d-flex flex-column">
-                    <a href="documents/creation-de-curriculum-vitae.html" class="text-color-light-grey font-size-lsmall mb-2"> Création de CV </a>
-                    <a href="documents/lettre-de-motivation.html" class="text-color-light-grey font-size-lsmall mb-2"> Lettre de motivation </a>
-                    <a href="documents/pack-cv-lettre-de-motivation.html" class="text-color-light-grey font-size-lsmall mb-2"> Pack CV + lettre de motivation </a>
-                    <a href="commander/document-sur-devis.html" class="text-color-light-grey font-size-lsmall mb-2"> Document sur devis </a>
+                                                    <a href="../documents/creation-de-curriculum-vitae.html" class="text-color-light-grey font-size-lsmall mb-2"> Création de CV </a>
+                                                    <a href="../documents/lettre-de-motivation.html" class="text-color-light-grey font-size-lsmall mb-2"> Lettre de motivation </a>
+                                                    <a href="../documents/pack-cv-lettre-de-motivation.html" class="text-color-light-grey font-size-lsmall mb-2"> Pack CV + lettre de motivation </a>
+                                                <a href="../commander/document-sur-devis.html" class="text-color-light-grey font-size-lsmall mb-2"> Document sur devis </a>
 
                     </div>
                 </div>
                 <span class="font-weight-bold d-flex text-uppercase mb-xl-4 mt-xl-4 mb-3 mt-2 font-size-xmedium text-white"> <b> Suivez-nous </b>  </span>
-                <div class="d-flex flex-grow-1 flex-wrap justify-content-xl-start justify-content-start">
+                 <div class="d-flex flex-grow-1 flex-wrap justify-content-xl-start justify-content-start">
                     <a href="#" target="_blank" class="btn-social btn btn-sm btn-padding-sm-depth font-size-normal btn-facebook mb-2 mb-xl-0 px-sm-1 px-1"><i class="fab fa-facebook"></i> Facebook
                     </a>
                     <a href="#" target="_blank" class="btn-social btn btn-sm btn-padding-sm-depth font-size-normal btn-twitter  mb-2 mb-xl-0 ml-1 px-sm-1 ml-xl-2 px-1 ml-sm-2"><i class="fab fa-twitter"></i>
@@ -627,11 +614,11 @@
         <div class="row pt-xl-3 pb-xl-3 pt-sm-2 pb-sm-2">
             <div class="col-lg-4 mb-sm-0 mt-sm-0 mt-2 mb-2 text-center text-sm-left">
                 <span style="margin-top: 1px;" class="text-white font-weight-bold font-size-normal"> © Copyright 2019 Mystudies.com - <a class="text-white font-weight-normal font-size-normal"
-                            href="charte-donnees-personnelles.html">Charte de confidentialité</a></span>
+                            href="../charte-donnees-personnelles.html">Charte de confidentialité</a></span>
             </div>
             <div class="col-lg-6 d-flex align-items-center pl-sm-5 mb-sm-0 mt-sm-0 mt-2 mb-2 text-center text-sm-left">
                 <span class="text-white float-right font-size-lsmall">
-                    <a class="text-white" target="_blank" href="https://www.checkout.com/"><i class="fas fa-shield-check"></i> Paiement 100 % sécurisé avec notre partenaire <b>checkout </b>.com                        <img src="imgs/payments.png" style="margin-top:-1px;" class="ml-2 mt-sm-0 mt-2 logo-footer mr-0" alt=""></a> &nbsp;&nbsp;
+                    <a class="text-white" target="_blank" href="https://www.checkout.com/"><i class="fas fa-shield-check"></i> Paiement 100 % sécurisé avec notre partenaire <b>checkout </b>.com                        <img src="../imgs/payments.png" style="margin-top:-1px;" class="ml-2 mt-sm-0 mt-2 logo-footer mr-0" alt=""></a> &nbsp;&nbsp;
                 </span>
             </div>
             <div class="col-lg-2 mb-sm-0 mt-sm-0 mt-2 mb-2 text-center text-sm-left">
@@ -647,15 +634,15 @@
 
 </body>
 
-<script src="js/manifest9dd0.js?id=ecd8679b8a9f31fdea9b"></script>
-<script src="js/vendor6a27.js?id=242f52b329ece43290bd"></script>
-<script src="js/app0a37.js?id=adcd9a48c9db399a9dc9"></script>
+<script src="../js/manifest9dd0.js?id=ecd8679b8a9f31fdea9b"></script>
+<script src="../js/vendor6a27.js?id=242f52b329ece43290bd"></script>
+<script src="../js/app0a37.js?id=adcd9a48c9db399a9dc9"></script>
 
 
     <script defer type="text/javascript">
         $(document).ready(function () {
             var script = document.createElement('script');
-            script.src = "js/tawkto.js";
+            script.src = "../js/tawkto.js";
             setTimeout(function () {
                 document.body.appendChild(script);
             }, 3000);

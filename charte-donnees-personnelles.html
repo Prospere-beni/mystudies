@@ -1,71 +1,12 @@
-
-
-
-<?php
-    
-    include_once('dbconnexion.php');
-
-    
-    
-    if(isset($_POST['submit_1'])){
-    $lastname= $_POST['lastname'];
-    $firstname= htmlspecialchars($_POST["firstname"]);
-    $school_class= htmlspecialchars($_POST["school_class"]);
-    $email=htmlspecialchars($_POST["email"]); 
-    $phone= htmlspecialchars( $_POST["phone"]);
-    $order_id= $_POST["order_id"];
-    $about= $_POST["about"];
-    $message= $_POST["message"];
-
-    //echo $lastname;
-    //echo $firstname;
-    //echo $school_class;
-    //echo $email;
-    //echo $phone;
-    //echo $order_id;
-    //echo $about;
-    //echo $message;
-
-
-    //On insère les données reçues si les champs sont remplis
-    if(!empty($lastname)  && !empty($firstname) && !empty($school_class) && !empty($email)  && !empty($phone) && !empty($order_id) && !empty($about) && !empty($message)){
-                 
-                $sth = $dbco->prepare("
-                    INSERT INTO membres(lastname , firstname , school_class , email , phone , order_id , about , message)
-                    VALUES(:lastname, :firstname, :school_class, :email, :phone, :order_id, :about,:message)");
-
-                    $sth->bindValue(':lastname', $lastname);
-                    $sth->bindValue(':firstname', $firstname);
-                    $sth->bindValue(':school_class', $school_class);
-                    $sth->bindValue(':email',  $email);
-                    $sth->bindValue(':phone', $phone);
-                    $sth->bindValue(':order_id', $order_id);
-                    $sth->bindValue(':about',  $about);
-                    $sth->bindValue(':message',  $message);
-                    $exec  =  $sth->execute();
-                    
-                      //On renvoie l'utilisateur vers la page de remerciement
-                      header("Location:index.html");
-                    
-            }
-
-}
-
-
-   
-    
-?>
-
-
 <!doctype html>
 
 <html lang="fr">
+
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 <link rel="dns-prefetch" href="index.html">
 <link rel="dns-prefetch" href="http://www.googletagmanager.com/">
 <link rel="dns-prefetch" href="http://cdnjs.cloudflare.com/">
-<link rel="dns-prefetch" href="http://www.google.com/">
 <link rel="dns-prefetch" href="http://www.facebook.com/">
 <link rel="dns-prefetch" href="http://www.instagram.com/">
 <link rel="dns-prefetch" href="http://twitter.com/">
@@ -77,10 +18,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD">
 
-    <title>Contactez-nous ! - MyStudies.com</title>
-<meta name="description" content="Notre &eacute;quipe se tient &agrave; votre disposition pour vous assister ou vous informer. Remplissez le formulaire de contact.">
-<meta name="keywords" content="contact">
-<link rel="canonical" href="contact.html"/>
+    <title>Charte des données personnelles - MyStudies.com</title>
+<meta name="description" content="Personnalisez votre gestion des cookies sur MyStudies.com.">
+<meta name="keywords" content="charte données personnelles,  cookies">
+<link rel="canonical" href="charte-donnees-personnelles.html"/>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
@@ -241,7 +182,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                                            <a class="navbar-brand d-none d-sm-block logo-large" href="index.html"><img src="imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a>
+                        <a class="navbar-brand d-none d-sm-block logo-large" href="index.html"><img src="imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a>
                          <a class="navbar-brand d-block d-sm-none logo-large" href="index.html"><img src="imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a>
                     
                     <div class="d-none d-sm-block"> <a class="navbar-brand logo-min" href="index.html"><img src="imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a> </div>
@@ -249,13 +190,14 @@
 
                     <div class="ml-0 ml-xl-4 mr-3 collapse navbar-collapse justify-content-start" id="navbarNavAltMarkup">
 
-                        <div class="navbar-nav">
+                         <div class="navbar-nav">
 
                             <a title="Commander un document scolaire" class="all-transition document-service d-flex flex-column nav-item text-color-white font-weight-bold nav-link " href="documents.html">Rédaction académique  </a>
                             <a title="Corriger un document scolaire" class="all-transition correction-service d-flex flex-column nav-item text-color-white font-weight-bold nav-link " href="corrections.html"> Correction et amélioration </a>
                             <a title="Place de marché de documents scolaires" class="all-transition marketplace-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link " href="place-de-marche.html"> Achat/Vente de documents </a>
                             <a title="Cours en ligne" href="cours-en-ligne.html" class="all-transition course-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link ">Cours particuliers en ligne </a>
                         </div>
+
                     </div>
 
                 </nav>
@@ -267,18 +209,27 @@
                             <img src="imgs/flag_fr.png" style="margin-top: -4px;" class="ml-2 icon-top-header" alt="">
                             <a href="#" id="language" data-toggle="dropdown" class="all-transition font-size-medium font-weight-bold ml-1 dropdown-toggle" aria-haspopup="true" aria-expanded="false"> </a>
                             <div class="dropdown-menu" aria-labelledby="language">
-                                <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+                                                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
                                     <input name="language_id" type="hidden" value="1"> 
 
-                                    <div data-toggle="popover" data-placement="top" data-content="Under development">
-                                    <button class="all-transition disabled  dropdown-item active"><img src="imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
+
+                                                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
+                                            <button class="all-transition disabled  dropdown-item active"><img src="imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
+
+                                    
                                     </form>
 
-                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+                                                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
                                     <input name="language_id" type="hidden" value="2"> 
-                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
+
+
+                                                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
                                             <button class="all-transition disabled  dropdown-item "><img src="imgs/flag_en.png" class="mr-1 mb-1" alt=""> Anglais</button> </div>
+
+                                    
                                     </form>
+
+                                
                             </div>
                         </div>
                     </div>
@@ -315,121 +266,158 @@
             </div>
 </header>
 
-    <div class="container-fluid bg-contact pb-3">
+
+    <div class="container-fluid">
+
         <div class="container pt-3">
+
             <div class="content-main-title pb-2">
+
                 <div class="d-flex flex-column align-items-center">
+
                     <div class="text-center w-100">
-                        <h3 class="text-color-blue text-center mt-0 mb-0 nunito font-weight-bolder font-size-xxlarge">Contactez-nous </h3>
-                        <span class="font-size-normal text-dark font-size-large"> Notre équipe se tient à votre disposition pour vous assister ou vous informer.  </span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="card mt-3">
-                        <div class="card-body pt-0">
-                            <div class="row">
-                                <div class="col-lg-12 px-4 pb-3 pt-2">
-                                    <div class="d-flex flex-column mt-3 pt-2 align-items-center">
-                                        <img src="imgs/icon-mail.png" class="pt-1" alt="">
-                                        <h3 class="text-center font-weight-bolder mt-2 pt-1 pb-0 mb-0 font-size-large"> Formulaire de contact </h3>
-                                    </div>
-                                    <form method="POST" action="https://www.mystudies.com/contact" accept-charset="UTF-8" class="pt-4 px-2 mb-0 ajax-form" enctype="multipart/form-data" autocomplete="off"><input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Vous êtes <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><select data-target="level" class="form-control input-medium select2-medium select-collapse select2-single" required name="type"><option selected="selected" value="">Sélectionnez un choix dans la liste</option><option value="student">Étudiant</option><option value="tutor">Tuteur</option><option value="parent">Parent</option><option value="other">Autre</option></select> 
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Nom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="lastname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Prénom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="firstname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
+                        <h1 class="font-size-xlarge mb-3 font-weight-bolder "> Charte des données personnelles </h1>
 
-                                        <div class="col-lg-12 collapse level option-student">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Niveau/classe <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" placeholder="Ex : Licence 1ère année Histoire" name="school_class" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
+                        <p class="text-center">
+                            Mystudies.com s'engage à ce que les traitements de données personnelles effectués sur cnil.fr soient conformes au règlement général sur la protection des données (RGPD) et à la loi Informatique et Libertés.
+                        </p>
 
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Adresse email <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" required name="email" type="email"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Téléphone (facultatif)</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="phone" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> N° commande</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="order_id" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
+                        <a href="javascript:" data-toggle="modal" data-target="#modalCookies" class="btn btn-blue font-weight-bold"> Personnaliser ma gestion des cookies sur ce site internet </a>
 
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Sujet de votre demande </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="about" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 pb-0 col-lg-12"> Message <span class="ml-1 font-size-medium text-color-red">*</span></label>
-                                                <div class="col-lg-12"><textarea rows="6" class="form-control input-medium" required name="message" cols="50"></textarea> 
-                                                </div>
-                                            </div>
-                                        </div>
+                        <div class="text-left">
 
-                                        <div class="col-lg-6">
-                                            <div class="form-group row">
-                                                <div class="d-flex align-items-center mb-0 pb-0 col-lg-12">
-                                                    <div data-sitekey="6LdNhZQUAAAAAHC3wPkYGOTjDU0EqMZgLeJfoodd" class="g-recaptcha"></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <h2 class="font-weight-bolder font-size-medium mt-5 mb-3">Politique de protection des données</h2>
 
-                                        <div class="col-lg-6">
-                                            <button class="btn mt-3 float-left font-size-large font-weight-bolder btn-blue w-100" name="submit_1" type="submit_1" value="submit_1">Envoyer le message</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                </form>
-                            </div>
+                            <p> MYSTUDIES peut recueillir directement auprès de vous des données à caractère personnel. Conformément au principe de minimisation, nous ne collectons que les données nécessaires au regard des finalités pour
+                                lesquelles elles sont traitées.
+                                <br/><br/>
+                                Les différentes catégories de données collectées lors votre souscription et dans le cadre de votre utilisation de nos services ou applications sont les suivantes :
+                                <br/><br/>
+                                • Données d’identification (notamment nom, prénom, numéro de client, identifiants techniques du client) ;<br/>
+                                • Données de contact (notamment adresse postale ou électronique) ;<br/>
+                                • Données d’usage (notamment pages web internes du site visitées) ;<br/>
+                                • Données de connexion (notamment adresse IP de votre ordinateur, logs de connexion et d’usage) ;<br/>
+                                • Données financières (moyens et historiques de paiement) ;<br/>
+                                • Données commerciales (liste des produits et services dont vous bénéficiez) ;<br/>
+                                • Données de localisation ;<br/>
+                                • Données de contenus.</p>
+
+                            <h2 class="font-weight-bolder font-size-medium mt-5 mb-3">Exercer vos droits</h2>
+
+                            <p> Vous pouvez demander à tout moment l’accès aux données à caractère personnel vous concernant, leur rectification, leur effacement (dans la mesure où cela n’empêche pas la bonne exécution du contrat ou le
+                                respect des obligations légales de MYSTUDIES) et la limitation d’un ou plusieurs traitements particuliers de données vous concernant, dans les conditions prévues par la Réglementation.
+                                <br/><br/>
+                                Vous disposez également du droit de modifier ou de retirer, à tout moment, les consentements que vous nous avez accordés pour le traitement de vos données à caractère personnel.
+                                <br/><br/>
+                                Vous disposez par ailleurs du droit de vous opposer à un traitement de vos données à caractère personnel et du droit à leur portabilité, dans les conditions fixées par la Réglementation.
+                                <br/><br/>
+                                Vos données à caractère personnel peuvent être conservées ou supprimées après votre décès conformément à la Réglementation. Vous disposez du droit de donner instruction à MYSTUDIES de communiquer ces données à un
+                                tiers que vous aurez préalablement désigné.
+                                <br/><br/>
+                                <b>Actualisation des données transmises</b>
+                                <br/><br/>
+                                Il est important que les informations que vous nous transmettez soient exactes et à jour et que vous nous informiez sans délai de tout changement significatif vous concernant.
+                                <br/><br/>
+                                <b>Modalités d’exercice</b>
+                                 <br/><br/>
+                                Vous pouvez exercer vos droits à tout moment en nous envoyant un mail à info@mystudies.com ou un courrier postal à :
+                                <br/><br/>
+                                • Service client Mystudies.com Limited - 239 Kensington High Street W865A BP334, Londres, Royaume Uni
+                                <br/><br/>
+                                Vous devrez fournir vos nom, prénom, numéro d’appel ainsi qu’une copie d’une pièce d’identité. Si vous n’êtes pas satisfait de nos échanges, vous avez la possibilité de saisir la Commission Nationale de
+                                l’Informatique et des Libertés (CNIL) à l’adresse suivante :
+                                <br/><br/>
+                                • CNIL – 3 place de Fontenoy – TSA 80715 – 75334 Paris cedex 07</p>
+
+                            <h2 class="font-weight-bolder font-size-medium mt-5 mb-3">A propos des cookies</h2>
+
+                            <p> </p>
+
+                            <h3 class="font-weight-bolder font-size-medium mt-5 mb-3">Cookies internes nécessaires au site pour fonctionner</h3>
+
+                            <table class="table table-default">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Nom du cookie</th>
+                                    <th scope="col">Finalité</th>
+                                    <th scope="col">Durée de conservation</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">XSRF-TOKEN</th>
+                                    <td> Jeton unique permettant de vous protéger contre les failles CSRF.</td>
+                                    <td> 12 mois</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">mystudies_session</th>
+                                    <td> Créer un identifiant unique permettant d'identifier votre session de naviguation sur Mystudies.com.</td>
+                                    <td> 12 mois</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">privacy</th>
+                                    <td> Sauvegarde des choix en matière de consentement des cookies</td>
+                                    <td> 12 mois</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <h3 class="font-weight-bolder font-size-medium mt-5 mb-3"> Cookies de mesure d’audience </h3>
+
+                            <p>Ces cookies permettent au site de fonctionner de manière optimale. Vous pouvez vous y opposer et les supprimer en utilisant les paramètres de votre navigateur, cependant votre expérience utilisateur risque
+                                d’être dégradée.</p>
+
+                            <table class="table table-default">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Nom du cookie</th>
+                                    <th scope="col">Finalité</th>
+                                    <th scope="col">Durée de conservation</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">_ga, _gid, _gat_gtag_UA_135049529_1, _gat_gtag_UA_100948456_5</th>
+                                    <td> Recueil d'informations et statistiques avec google analytics</td>
+                                    <td> 12 mois</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <h3 class="font-weight-bolder font-size-medium mt-5 mb-3"> Cookies tiers destinés à améliorer l’interactivité du site. </h3>
+
+                            <p>Ces cookies permettent au site de fonctionner de manière optimale. Vous pouvez vous y opposer et les supprimer en utilisant les paramètres de votre navigateur, cependant votre expérience utilisateur risque
+                                d’être dégradée.</p>
+
+                            <table class="table table-default">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Nom du cookie</th>
+                                    <th scope="col">Finalité</th>
+                                    <th scope="col">Durée de conservation</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">__tawkuuid, TawkConnectionTime</th>
+                                    <td> Ce cookie est généralement défini par un site Web utilisant Taw.to, un service de chat en direct. Ce cookie enregistre l'utilisateur final afin que les conversations passées puissent être identifiées afin d'améliorer son service.</td>
+                                    <td> 12 mois</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
                         </div>
+
                     </div>
+
                 </div>
 
             </div>
+
         </div>
+
     </div>
-
-
-    <script defer src='../www.google.com/recaptcha/api.js'></script>
 
 <div class="container-fluid newsletter-register pt-4 mt-4 pb-4">
 
@@ -439,7 +427,7 @@
 
             <div class="col-12 text-sm-left text-center col-sm-7">
                 <span class="font-weight-light text-sm-right text-center float-sm-right font-size-larger mt-1">
-                                            <span class="font-weight-bolder">Ne manquez plus nos promos et bénéficiez jusqu’à 50% de réduction</span> une fois par semaine à travers :                                    </span>
+                <span class="font-weight-bolder">Ne manquez plus nos promos et bénéficiez jusqu’à 50% de réduction</span> une fois par semaine à travers :                                    </span>
             </div>
 
             <div class="col-12 mt-sm-0 mt-3 col-sm-3">
@@ -627,7 +615,7 @@
         <div class="row pt-xl-3 pb-xl-3 pt-sm-2 pb-sm-2">
             <div class="col-lg-4 mb-sm-0 mt-sm-0 mt-2 mb-2 text-center text-sm-left">
                 <span style="margin-top: 1px;" class="text-white font-weight-bold font-size-normal"> © Copyright 2019 Mystudies.com - <a class="text-white font-weight-normal font-size-normal"
-                            href="charte-donnees-personnelles.html">Charte de confidentialité</a></span>
+                href="charte-donnees-personnelles.html">Charte de confidentialité</a></span>
             </div>
             <div class="col-lg-6 d-flex align-items-center pl-sm-5 mb-sm-0 mt-sm-0 mt-2 mb-2 text-center text-sm-left">
                 <span class="text-white float-right font-size-lsmall">

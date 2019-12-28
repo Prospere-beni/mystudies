@@ -1,86 +1,26 @@
-
-
-
-<?php
-    
-    include_once('dbconnexion.php');
-
-    
-    
-    if(isset($_POST['submit_1'])){
-    $lastname= $_POST['lastname'];
-    $firstname= htmlspecialchars($_POST["firstname"]);
-    $school_class= htmlspecialchars($_POST["school_class"]);
-    $email=htmlspecialchars($_POST["email"]); 
-    $phone= htmlspecialchars( $_POST["phone"]);
-    $order_id= $_POST["order_id"];
-    $about= $_POST["about"];
-    $message= $_POST["message"];
-
-    //echo $lastname;
-    //echo $firstname;
-    //echo $school_class;
-    //echo $email;
-    //echo $phone;
-    //echo $order_id;
-    //echo $about;
-    //echo $message;
-
-
-    //On insère les données reçues si les champs sont remplis
-    if(!empty($lastname)  && !empty($firstname) && !empty($school_class) && !empty($email)  && !empty($phone) && !empty($order_id) && !empty($about) && !empty($message)){
-                 
-                $sth = $dbco->prepare("
-                    INSERT INTO membres(lastname , firstname , school_class , email , phone , order_id , about , message)
-                    VALUES(:lastname, :firstname, :school_class, :email, :phone, :order_id, :about,:message)");
-
-                    $sth->bindValue(':lastname', $lastname);
-                    $sth->bindValue(':firstname', $firstname);
-                    $sth->bindValue(':school_class', $school_class);
-                    $sth->bindValue(':email',  $email);
-                    $sth->bindValue(':phone', $phone);
-                    $sth->bindValue(':order_id', $order_id);
-                    $sth->bindValue(':about',  $about);
-                    $sth->bindValue(':message',  $message);
-                    $exec  =  $sth->execute();
-                    
-                      //On renvoie l'utilisateur vers la page de remerciement
-                      header("Location:index.html");
-                    
-            }
-
-}
-
-
-   
-    
-?>
-
-
 <!doctype html>
 
 <html lang="fr">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
 <head>
-<link rel="dns-prefetch" href="index.html">
-<link rel="dns-prefetch" href="http://www.googletagmanager.com/">
-<link rel="dns-prefetch" href="http://cdnjs.cloudflare.com/">
-<link rel="dns-prefetch" href="http://www.google.com/">
-<link rel="dns-prefetch" href="http://www.facebook.com/">
-<link rel="dns-prefetch" href="http://www.instagram.com/">
-<link rel="dns-prefetch" href="http://twitter.com/">
-<link rel="dns-prefetch" href="http://www.linkedin.com/">
-<link rel="dns-prefetch" href="http://www.checkout.com/">
+<link rel="dns-prefetch" href="//www.mystudies.com">
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+<link rel="dns-prefetch" href="//www.facebook.com">
+<link rel="dns-prefetch" href="//www.instagram.com">
+<link rel="dns-prefetch" href="//twitter.com">
+<link rel="dns-prefetch" href="//www.linkedin.com">
+<link rel="dns-prefetch" href="//www.checkout.com">
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD">
+    <meta name="csrf-token" content="">
 
-    <title>Contactez-nous ! - MyStudies.com</title>
-<meta name="description" content="Notre &eacute;quipe se tient &agrave; votre disposition pour vous assister ou vous informer. Remplissez le formulaire de contact.">
-<meta name="keywords" content="contact">
-<link rel="canonical" href="contact.html"/>
+    <title>Mystudies - Commander document scolaire ou professionnel sur mesure.</title>
+<meta name="description" content="Mystudies est un service sur mesure d'aide &agrave; la r&eacute;daction par un sp&eacute;cialiste, pour vos devoirs du coll&egrave;ge au Master et pour vos documents professionnels.">
+<meta name="keywords" content="Rémunération, Salaire, Test de salaire, Enquête salariale, Benchmarks de salaires">
+<link rel="canonical" href="https://www.mystudies.com/constants.js"/>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
@@ -90,10 +30,10 @@
     <meta name="trustpilot-one-time-domain-verification-id" content="RC4VGMaIeTMEm6a8JSEkdYVUHZ4HMsXFxvkuw1Rr"/>
     <meta name="google-site-verification" content="3F68zubcrYaAzWeXPgiNixnjGXVdFyMWPaoinXO-U4w"/>
 
-    <link rel="shortcut icon" href="imgs/fav.png" type="image/x-icon">
-    <link rel="icon" href="imgs/fav.png" type="image/x-icon">
-    <link rel="preload" href="css/app66a7.css?id=63fde31c37b4743ec018" as="style">
-    <link rel="stylesheet" href="css/app66a7.css?id=63fde31c37b4743ec018"/>
+    <link rel="shortcut icon" href="https://www.mystudies.com/imgs/fav.png" type="image/x-icon">
+    <link rel="icon" href="https://www.mystudies.com/imgs/fav.png" type="image/x-icon">
+    <link rel="preload" href="/css/app.css?id=63fde31c37b4743ec018" as="style">
+    <link rel="stylesheet" href="/css/app.css?id=63fde31c37b4743ec018"/>
 
     <script defer src="https://www.googletagmanager.com/gtag/js?id=UA-100948456-5"></script>
 
@@ -117,8 +57,8 @@
         gtag('config', 'UA-135049529-1');
     </script>
 
-    <script defer type="text/javascript" src="../widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"></script>
-    <script defer type="text/javascript" src="../cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+    <script defer type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"></script>
+    <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 </head>
 
 <body>
@@ -131,11 +71,11 @@
         <span class="text-dark font-size-normal line-height-medium">
         En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de Cookies ou autres traceurs pour vous proposer votre dernière commande créée sur ce site et conserver la connexion automatique à votre compte.
         </span>
-        <form method="POST" action="https://www.mystudies.com/cookies/acceptAll" accept-charset="UTF-8" enctype="multipart/form-data" class="ajax-form" data-loading-overlay=""><input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+        <form method="POST" action="https://www.mystudies.com/cookies/acceptAll" accept-charset="UTF-8" enctype="multipart/form-data" class="ajax-form" data-loading-overlay=""><input name="_token" type="hidden"> 
         <button  class="btn btn-blue font-weight-bolder ml-4 text-nowrap font-size-normal py-1 mr-2"> OK, tout accepter </button>
         </form>
 
-        <a data-toggle="modal" data-target="#modalCookies" href="#" class="btn btn-light font-size-normal py-1 ml-3"> Personnaliser </a>
+        <a data-toggle="modal" data-target="#modalCookies" href="" class="btn btn-light font-size-normal py-1 ml-3"> Personnaliser </a>
 
     </div>
 
@@ -148,7 +88,7 @@
             <div class="modal-body">
                 <div class="row">
 
-                    <form method="POST" action="https://www.mystudies.com/cookies/apply" accept-charset="UTF-8" enctype="multipart/form-data" class="ajax-form"><input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+                    <form method="POST" action="https://www.mystudies.com/cookies/apply" accept-charset="UTF-8" enctype="multipart/form-data" class="ajax-form"><input name="_token" type="hidden"> 
 
                     <div class="col-lg-12">
 
@@ -241,11 +181,11 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                                            <a class="navbar-brand d-none d-sm-block logo-large" href="index.html"><img src="imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a>
-                         <a class="navbar-brand d-block d-sm-none logo-large" href="index.html"><img src="imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a>
+                                            <a class="navbar-brand d-none d-sm-block logo-large" href="https://www.mystudies.com"><img src="https://www.mystudies.com/imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a>
+                         <a class="navbar-brand d-block d-sm-none logo-large" href="https://www.mystudies.com"><img src="https://www.mystudies.com/imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a>
                     
-                    <div class="d-none d-sm-block"> <a class="navbar-brand logo-min" href="index.html"><img src="imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a> </div>
-                     <div class="d-block d-sm-none"> <a class="navbar-brand logo-min" href="index.html"><img src="imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a> </div>
+                    <div class="d-none d-sm-block"> <a class="navbar-brand logo-min" href="https://www.mystudies.com"><img src="https://www.mystudies.com/imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a> </div>
+                     <div class="d-block d-sm-none"> <a class="navbar-brand logo-min" href="https://www.mystudies.com"><img src="https://www.mystudies.com/imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a> </div>
 
                     <div class="ml-0 ml-xl-4 mr-3 collapse navbar-collapse justify-content-start" id="navbarNavAltMarkup">
 
@@ -256,6 +196,7 @@
                             <a title="Place de marché de documents scolaires" class="all-transition marketplace-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link " href="place-de-marche.html"> Achat/Vente de documents </a>
                             <a title="Cours en ligne" href="cours-en-ligne.html" class="all-transition course-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link ">Cours particuliers en ligne </a>
                         </div>
+
                     </div>
 
                 </nav>
@@ -264,21 +205,30 @@
                     <div class="text-top-header top-header-right select-language ml-4 mr-4 ">
 
                         <div class="dropdown dropleft drop-language">
-                            <img src="imgs/flag_fr.png" style="margin-top: -4px;" class="ml-2 icon-top-header" alt="">
-                            <a href="#" id="language" data-toggle="dropdown" class="all-transition font-size-medium font-weight-bold ml-1 dropdown-toggle" aria-haspopup="true" aria-expanded="false"> </a>
+                            <img src="https://www.mystudies.com/imgs/flag_fr.png" style="margin-top: -4px;" class="ml-2 icon-top-header" alt="">
+                            <a href="" id="language" data-toggle="dropdown" class="all-transition font-size-medium font-weight-bold ml-1 dropdown-toggle" aria-haspopup="true" aria-expanded="false"> </a>
                             <div class="dropdown-menu" aria-labelledby="language">
-                                <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+                                                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden"> 
                                     <input name="language_id" type="hidden" value="1"> 
 
-                                    <div data-toggle="popover" data-placement="top" data-content="Under development">
-                                    <button class="all-transition disabled  dropdown-item active"><img src="imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
+
+                                                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
+                                            <button class="all-transition disabled  dropdown-item active"><img src="https://www.mystudies.com/imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
+
+                                    
                                     </form>
 
-                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+                                                                    <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden"> 
                                     <input name="language_id" type="hidden" value="2"> 
-                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
-                                            <button class="all-transition disabled  dropdown-item "><img src="imgs/flag_en.png" class="mr-1 mb-1" alt=""> Anglais</button> </div>
+
+
+                                                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
+                                            <button class="all-transition disabled  dropdown-item "><img src="https://www.mystudies.com/imgs/flag_en.png" class="mr-1 mb-1" alt=""> Anglais</button> </div>
+
+                                    
                                     </form>
+
+                                
                             </div>
                         </div>
                     </div>
@@ -286,12 +236,12 @@
                     
                         <div class="text-top-header top-header-right mr-2">
 
-                            <a style="margin-top: -1px;" href="devenir-tuteur-correcteur.html" class="btn d-none d-sm-block btn-secondary font-size-normal text-white full-rounded dark px-3 hvr-icon-wobble-horizontal font-weight-bold">
+                            <a style="margin-top: -1px;" href="https://www.mystudies.com/devenir-tuteur-correcteur" class="btn d-none d-sm-block btn-secondary font-size-normal text-white full-rounded dark px-3 hvr-icon-wobble-horizontal font-weight-bold">
                                 <i class="fas font-size-medium ml-0 mr-1 fa-graduation-cap"></i>
                                 <span class="mr-1 font-weight-bold">Devenir tuteur</span>
                             </a>
 
-                            <a style="margin-top: -1px;padding: 4px 5.5px !important;" href="devenir-tuteur-correcteur.html" class="btn ml-1 d-sm-none d-block btn-secondary font-size-normal text-white full-rounded dark px-2 hvr-icon-wobble-horizontal font-weight-bold">
+                            <a style="margin-top: -1px;padding: 4px 5.5px !important;" href="https://www.mystudies.com/devenir-tuteur-correcteur" class="btn ml-1 d-sm-none d-block btn-secondary font-size-normal text-white full-rounded dark px-2 hvr-icon-wobble-horizontal font-weight-bold">
                                 <i class="fas font-size-medium ml-0 mr-0 fa-graduation-cap"></i>
                             </a>
 
@@ -300,8 +250,8 @@
                     
                     
                         <div class="ml-0">
-                            <a href="connexion.php" class="btn btn-blue d-none d-sm-block full-rounded blue font-size-normal px-3 hvr-icon-wobble-horizontal font-weight-bold"><i class="fas font-size-medium ml-0 mr-1 fa-user"></i> Connexion</a>
-                            <a style="padding: 4px 8px !important;" href="connexion.php" class="btn btn-blue d-sm-none d-block full-rounded blue font-size-normal px-3 hvr-icon-wobble-horizontal font-weight-bold"><i class="fas font-size-medium ml-0 mr-0 fa-user"></i> </a>
+                            <a href="https://www.mystudies.com/connexion" class="btn btn-blue d-none d-sm-block full-rounded blue font-size-normal px-3 hvr-icon-wobble-horizontal font-weight-bold"><i class="fas font-size-medium ml-0 mr-1 fa-user"></i> Connexion</a>
+                            <a style="padding: 4px 8px !important;" href="https://www.mystudies.com/connexion" class="btn btn-blue d-sm-none d-block full-rounded blue font-size-normal px-3 hvr-icon-wobble-horizontal font-weight-bold"><i class="fas font-size-medium ml-0 mr-0 fa-user"></i> </a>
                         </div>
 
                     
@@ -315,121 +265,20 @@
             </div>
 </header>
 
-    <div class="container-fluid bg-contact pb-3">
-        <div class="container pt-3">
-            <div class="content-main-title pb-2">
-                <div class="d-flex flex-column align-items-center">
-                    <div class="text-center w-100">
-                        <h3 class="text-color-blue text-center mt-0 mb-0 nunito font-weight-bolder font-size-xxlarge">Contactez-nous </h3>
-                        <span class="font-size-normal text-dark font-size-large"> Notre équipe se tient à votre disposition pour vous assister ou vous informer.  </span>
-                    </div>
+
+<div class="container-fluid bg-404">
+    <div class="container pt-3">
+        <div class="content-main-title pb-2">
+            <div class="d-flex flex-column align-items-center">
+                <div class="text-left d-flex flex-column align-items-start w-100">
+                    <h1 class="font-size-xxxlarge mb-2 pt-5 font-weight-bolder "> Erreur 404 </h1>
+                    <span class="font-size-xlarge">Cette page n'existe pas sur MyStudies.com</span>
+                    <a href="https://www.mystudies.com" class="btn font-size-large mt-5 px-5 btn-dark-blue">Retourner sur la page d'accueil</a>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="card mt-3">
-                        <div class="card-body pt-0">
-                            <div class="row">
-                                <div class="col-lg-12 px-4 pb-3 pt-2">
-                                    <div class="d-flex flex-column mt-3 pt-2 align-items-center">
-                                        <img src="imgs/icon-mail.png" class="pt-1" alt="">
-                                        <h3 class="text-center font-weight-bolder mt-2 pt-1 pb-0 mb-0 font-size-large"> Formulaire de contact </h3>
-                                    </div>
-                                    <form method="POST" action="https://www.mystudies.com/contact" accept-charset="UTF-8" class="pt-4 px-2 mb-0 ajax-form" enctype="multipart/form-data" autocomplete="off"><input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Vous êtes <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><select data-target="level" class="form-control input-medium select2-medium select-collapse select2-single" required name="type"><option selected="selected" value="">Sélectionnez un choix dans la liste</option><option value="student">Étudiant</option><option value="tutor">Tuteur</option><option value="parent">Parent</option><option value="other">Autre</option></select> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Nom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="lastname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Prénom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="firstname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12 collapse level option-student">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Niveau/classe <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" placeholder="Ex : Licence 1ère année Histoire" name="school_class" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Adresse email <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" required name="email" type="email"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Téléphone (facultatif)</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="phone" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> N° commande</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="order_id" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Sujet de votre demande </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="about" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 pb-0 col-lg-12"> Message <span class="ml-1 font-size-medium text-color-red">*</span></label>
-                                                <div class="col-lg-12"><textarea rows="6" class="form-control input-medium" required name="message" cols="50"></textarea> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="form-group row">
-                                                <div class="d-flex align-items-center mb-0 pb-0 col-lg-12">
-                                                    <div data-sitekey="6LdNhZQUAAAAAHC3wPkYGOTjDU0EqMZgLeJfoodd" class="g-recaptcha"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <button class="btn mt-3 float-left font-size-large font-weight-bolder btn-blue w-100" name="submit_1" type="submit_1" value="submit_1">Envoyer le message</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
-
-
-    <script defer src='../www.google.com/recaptcha/api.js'></script>
+</div>
 
 <div class="container-fluid newsletter-register pt-4 mt-4 pb-4">
 
@@ -444,6 +293,7 @@
 
             <div class="col-12 mt-sm-0 mt-3 col-sm-3">
 
+                
                 <div class="d-flex flex-grow-1 justify-content-center justify-content-sm-start">
 
                     <a href="#" data-toggle="modal" data-target="#modalEmailNewsletter" class=""> <img src="imgs/icon-mail-nl.png" style="margin-top:-1px;" class="" alt=""> </a>
@@ -465,7 +315,7 @@
                             </div>
                             <div class="modal-body">
 
-                                <form method="POST" action="https://www.mystudies.com/suscribe" accept-charset="UTF-8" class="pt-0 mb-0 ajax-form" enctype="multipart/form-data"><input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+                                <form method="POST" action="https://www.mystudies.com/suscribe" accept-charset="UTF-8" class="pt-0 mb-0 ajax-form" enctype="multipart/form-data"><input name="_token" type="hidden"> 
 
                                 <div class="row">
 
@@ -627,11 +477,11 @@
         <div class="row pt-xl-3 pb-xl-3 pt-sm-2 pb-sm-2">
             <div class="col-lg-4 mb-sm-0 mt-sm-0 mt-2 mb-2 text-center text-sm-left">
                 <span style="margin-top: 1px;" class="text-white font-weight-bold font-size-normal"> © Copyright 2019 Mystudies.com - <a class="text-white font-weight-normal font-size-normal"
-                            href="charte-donnees-personnelles.html">Charte de confidentialité</a></span>
+                            href="https://www.mystudies.com/charte-donnees-personnelles">Charte de confidentialité</a></span>
             </div>
             <div class="col-lg-6 d-flex align-items-center pl-sm-5 mb-sm-0 mt-sm-0 mt-2 mb-2 text-center text-sm-left">
                 <span class="text-white float-right font-size-lsmall">
-                    <a class="text-white" target="_blank" href="https://www.checkout.com/"><i class="fas fa-shield-check"></i> Paiement 100 % sécurisé avec notre partenaire <b>checkout </b>.com                        <img src="imgs/payments.png" style="margin-top:-1px;" class="ml-2 mt-sm-0 mt-2 logo-footer mr-0" alt=""></a> &nbsp;&nbsp;
+                    <a class="text-white" target="_blank" href="https://www.checkout.com/"><i class="fas fa-shield-check"></i> Paiement 100 % sécurisé avec notre partenaire <b>checkout </b>.com                        <img src="https://www.mystudies.com/imgs/payments.png" style="margin-top:-1px;" class="ml-2 mt-sm-0 mt-2 logo-footer mr-0" alt=""></a> &nbsp;&nbsp;
                 </span>
             </div>
             <div class="col-lg-2 mb-sm-0 mt-sm-0 mt-2 mb-2 text-center text-sm-left">
@@ -647,19 +497,21 @@
 
 </body>
 
-<script src="js/manifest9dd0.js?id=ecd8679b8a9f31fdea9b"></script>
-<script src="js/vendor6a27.js?id=242f52b329ece43290bd"></script>
-<script src="js/app0a37.js?id=adcd9a48c9db399a9dc9"></script>
+<script src="/js/manifest.js?id=ecd8679b8a9f31fdea9b"></script>
+<script src="/js/vendor.js?id=242f52b329ece43290bd"></script>
+<script src="/js/app.js?id=adcd9a48c9db399a9dc9"></script>
 
 
     <script defer type="text/javascript">
         $(document).ready(function () {
             var script = document.createElement('script');
-            script.src = "js/tawkto.js";
+            script.src = "/js/tawkto.js";
             setTimeout(function () {
                 document.body.appendChild(script);
             }, 3000);
         });
 
     </script>
+
+
 </html>

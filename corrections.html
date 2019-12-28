@@ -1,62 +1,3 @@
-
-
-
-<?php
-    
-    include_once('dbconnexion.php');
-
-    
-    
-    if(isset($_POST['submit_1'])){
-    $lastname= $_POST['lastname'];
-    $firstname= htmlspecialchars($_POST["firstname"]);
-    $school_class= htmlspecialchars($_POST["school_class"]);
-    $email=htmlspecialchars($_POST["email"]); 
-    $phone= htmlspecialchars( $_POST["phone"]);
-    $order_id= $_POST["order_id"];
-    $about= $_POST["about"];
-    $message= $_POST["message"];
-
-    //echo $lastname;
-    //echo $firstname;
-    //echo $school_class;
-    //echo $email;
-    //echo $phone;
-    //echo $order_id;
-    //echo $about;
-    //echo $message;
-
-
-    //On insère les données reçues si les champs sont remplis
-    if(!empty($lastname)  && !empty($firstname) && !empty($school_class) && !empty($email)  && !empty($phone) && !empty($order_id) && !empty($about) && !empty($message)){
-                 
-                $sth = $dbco->prepare("
-                    INSERT INTO membres(lastname , firstname , school_class , email , phone , order_id , about , message)
-                    VALUES(:lastname, :firstname, :school_class, :email, :phone, :order_id, :about,:message)");
-
-                    $sth->bindValue(':lastname', $lastname);
-                    $sth->bindValue(':firstname', $firstname);
-                    $sth->bindValue(':school_class', $school_class);
-                    $sth->bindValue(':email',  $email);
-                    $sth->bindValue(':phone', $phone);
-                    $sth->bindValue(':order_id', $order_id);
-                    $sth->bindValue(':about',  $about);
-                    $sth->bindValue(':message',  $message);
-                    $exec  =  $sth->execute();
-                    
-                      //On renvoie l'utilisateur vers la page de remerciement
-                      header("Location:index.html");
-                    
-            }
-
-}
-
-
-   
-    
-?>
-
-
 <!doctype html>
 
 <html lang="fr">
@@ -65,8 +6,8 @@
 <link rel="dns-prefetch" href="index.html">
 <link rel="dns-prefetch" href="http://www.googletagmanager.com/">
 <link rel="dns-prefetch" href="http://cdnjs.cloudflare.com/">
-<link rel="dns-prefetch" href="http://www.google.com/">
 <link rel="dns-prefetch" href="http://www.facebook.com/">
+<link rel="dns-prefetch" href="http://fr.trustpilot.com/">
 <link rel="dns-prefetch" href="http://www.instagram.com/">
 <link rel="dns-prefetch" href="http://twitter.com/">
 <link rel="dns-prefetch" href="http://www.linkedin.com/">
@@ -77,10 +18,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD">
 
-    <title>Contactez-nous ! - MyStudies.com</title>
-<meta name="description" content="Notre &eacute;quipe se tient &agrave; votre disposition pour vous assister ou vous informer. Remplissez le formulaire de contact.">
-<meta name="keywords" content="contact">
-<link rel="canonical" href="contact.html"/>
+    <title>Correction de devoirs - MyStudies.com</title>
+<meta name="description" content="Faites corriger votre devoir par un tuteur qui le retravaillera, reformulera et am&eacute;liorera pour qu&rsquo;il soit le plus pertinent possible.">
+<meta name="keywords" content="">
+<link rel="canonical" href="corrections.html"/>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
@@ -241,21 +182,22 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                                            <a class="navbar-brand d-none d-sm-block logo-large" href="index.html"><img src="imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a>
-                         <a class="navbar-brand d-block d-sm-none logo-large" href="index.html"><img src="imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a>
+                        <a class="navbar-brand d-none d-sm-block logo-large" href="index.html"><img src="imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a>
+                        <a class="navbar-brand d-block d-sm-none logo-large" href="index.html"><img src="imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a>
                     
                     <div class="d-none d-sm-block"> <a class="navbar-brand logo-min" href="index.html"><img src="imgs/logo_2.png" class="mr-0 pr-0 logo " alt=""></a> </div>
                      <div class="d-block d-sm-none"> <a class="navbar-brand logo-min" href="index.html"><img src="imgs/logo_dark_large_mobile.png" srcset="/imgs/logo_dark_large_mobile2x.png 2x" class="mr-0 pr-0 logo " alt=""></a> </div>
 
                     <div class="ml-0 ml-xl-4 mr-3 collapse navbar-collapse justify-content-start" id="navbarNavAltMarkup">
 
-                        <div class="navbar-nav">
+                         <div class="navbar-nav">
 
                             <a title="Commander un document scolaire" class="all-transition document-service d-flex flex-column nav-item text-color-white font-weight-bold nav-link " href="documents.html">Rédaction académique  </a>
                             <a title="Corriger un document scolaire" class="all-transition correction-service d-flex flex-column nav-item text-color-white font-weight-bold nav-link " href="corrections.html"> Correction et amélioration </a>
                             <a title="Place de marché de documents scolaires" class="all-transition marketplace-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link " href="place-de-marche.html"> Achat/Vente de documents </a>
                             <a title="Cours en ligne" href="cours-en-ligne.html" class="all-transition course-service nav-item d-flex flex-column text-color-white font-weight-bold nav-link ">Cours particuliers en ligne </a>
                         </div>
+
                     </div>
 
                 </nav>
@@ -267,18 +209,27 @@
                             <img src="imgs/flag_fr.png" style="margin-top: -4px;" class="ml-2 icon-top-header" alt="">
                             <a href="#" id="language" data-toggle="dropdown" class="all-transition font-size-medium font-weight-bold ml-1 dropdown-toggle" aria-haspopup="true" aria-expanded="false"> </a>
                             <div class="dropdown-menu" aria-labelledby="language">
-                                <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
+                            <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
                                     <input name="language_id" type="hidden" value="1"> 
 
-                                    <div data-toggle="popover" data-placement="top" data-content="Under development">
-                                    <button class="all-transition disabled  dropdown-item active"><img src="imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
+
+                                        <div data-toggle="popover" data-placement="top" data-content="Under development">
+                                            <button class="all-transition disabled  dropdown-item active"><img src="imgs/flag_fr.png" class="mr-1 mb-1" alt=""> Français</button> </div>
+
+                                    
                                     </form>
 
                                     <form method="POST" action="https://www.mystudies.com/changeCurrentLanguage" accept-charset="UTF-8" enctype="multipart/form-data"><input name="_method" type="hidden" value="PUT"> <input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
                                     <input name="language_id" type="hidden" value="2"> 
-                                            <div data-toggle="popover" data-placement="top" data-content="Under development">
+
+
+                                        <div data-toggle="popover" data-placement="top" data-content="Under development">
                                             <button class="all-transition disabled  dropdown-item "><img src="imgs/flag_en.png" class="mr-1 mb-1" alt=""> Anglais</button> </div>
+
+                                    
                                     </form>
+
+                                
                             </div>
                         </div>
                     </div>
@@ -315,121 +266,267 @@
             </div>
 </header>
 
-    <div class="container-fluid bg-contact pb-3">
+
+    <div class="container-fluid">
+
         <div class="container pt-3">
+
             <div class="content-main-title pb-2">
+
                 <div class="d-flex flex-column align-items-center">
+
                     <div class="text-center w-100">
-                        <h3 class="text-color-blue text-center mt-0 mb-0 nunito font-weight-bolder font-size-xxlarge">Contactez-nous </h3>
-                        <span class="font-size-normal text-dark font-size-large"> Notre équipe se tient à votre disposition pour vous assister ou vous informer.  </span>
+
+                        <h1 class="font-size-large text-color-blue mb-0 mt-0 font-weight-bolder"> Corrigez un document </h1>
+
+                        <h2 class="font-size-xlarge mb-2 mt-2 mt-sm-0 mb-sm-1"> Choisissez le type de correction que vous souhaitez. </h2>
+
+                        <span class="font-size-normal"><i class="fal fa-check"></i> Document 100% unique et sur mesure &nbsp;|&nbsp; <i class="fal fa-check"></i> Test anti-plagiat &nbsp;|&nbsp; <i class="fal fa-check"></i> Tuteurs expérimentés &nbsp;|&nbsp; <i
+                                    class="fal fa-check"></i> Révision gratuite &nbsp;|&nbsp; <i class="fal fa-check"></i> Communication avec le tuteur</span>
+
                     </div>
+
                 </div>
+
             </div>
+
             <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="card mt-3">
-                        <div class="card-body pt-0">
-                            <div class="row">
-                                <div class="col-lg-12 px-4 pb-3 pt-2">
-                                    <div class="d-flex flex-column mt-3 pt-2 align-items-center">
-                                        <img src="imgs/icon-mail.png" class="pt-1" alt="">
-                                        <h3 class="text-center font-weight-bolder mt-2 pt-1 pb-0 mb-0 font-size-large"> Formulaire de contact </h3>
-                                    </div>
-                                    <form method="POST" action="https://www.mystudies.com/contact" accept-charset="UTF-8" class="pt-4 px-2 mb-0 ajax-form" enctype="multipart/form-data" autocomplete="off"><input name="_token" type="hidden" value="J836bzz4ZRGrsTGHzBlZf6PYHb9JVgZXGivpGTWD"> 
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Vous êtes <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><select data-target="level" class="form-control input-medium select2-medium select-collapse select2-single" required name="type"><option selected="selected" value="">Sélectionnez un choix dans la liste</option><option value="student">Étudiant</option><option value="tutor">Tuteur</option><option value="parent">Parent</option><option value="other">Autre</option></select> 
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Nom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="lastname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Prénom </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="firstname" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
+                <div class="col-lg-6 mt-3">
 
-                                        <div class="col-lg-12 collapse level option-student">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Niveau/classe <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" placeholder="Ex : Licence 1ère année Histoire" name="school_class" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
+                    <div class="card card-shadow">
 
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Adresse email <span class="ml-1 text-color-red">*</span></label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" required name="email" type="email"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Téléphone (facultatif)</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="phone" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> N° commande</label>
-                                                <div class="col-lg-12"><input class="form-control input-medium numeric-int" name="order_id" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 col-lg-12"> Sujet de votre demande </label>
-                                                <div class="col-lg-12"><input class="form-control input-medium" name="about" type="text"> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group row">
-                                                <label class="d-flex align-items-center mb-0 pb-0 col-lg-12"> Message <span class="ml-1 font-size-medium text-color-red">*</span></label>
-                                                <div class="col-lg-12"><textarea rows="6" class="form-control input-medium" required name="message" cols="50"></textarea> 
-                                                </div>
-                                            </div>
-                                        </div>
+                        <div class="card-body px-xl-5 px-4 d-flex flex-column align-items-center pt-4 card-skill">
 
-                                        <div class="col-lg-6">
-                                            <div class="form-group row">
-                                                <div class="d-flex align-items-center mb-0 pb-0 col-lg-12">
-                                                    <div data-sitekey="6LdNhZQUAAAAAHC3wPkYGOTjDU0EqMZgLeJfoodd" class="g-recaptcha"></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <img src="imgs/icon-feedback.png" class=" pr-0 mt-0 mb-1" alt="">
 
-                                        <div class="col-lg-6">
-                                            <button class="btn mt-3 float-left font-size-large font-weight-bolder btn-blue w-100" name="submit_1" type="submit_1" value="submit_1">Envoyer le message</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                </form>
+
+                            <h5 class="card-title font-size-xlarge mt-3 mb-2 font-weight-bolder text-color-blue text-center"> Commentaires et note </h5>
+
+                            <span class="font-size-xmedium mt-1 mb-1  line-height-medium font-weight-bolder text-center"> Besoin de commentaires, de conseils et d&#039;une note prévisionnelle sur un de vos documents académiques ? </span>
+
+                            <p class="card-text text-center font-size-normal mt-3"> Avec Mystudies.com, vous pouvez maintenant demander à l'un de nos correcteurs de relire entièrement votre document afin de proposer <b>des axes
+                                    d'améliorations, des commentaires et une note.</b>
+                            </p>
+
+                            <div class="text-center w-100 float-left mt-0 mb-2 text-dark line-height-large">
+
+                                <ul class="list-group w-100 float-left list-group-flush">
+
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-comments"></i></span> <span>Analyses et conseils d'amélioration</span>
+                                    </li>
+
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-star-half-alt"></i></span> <span>Obtenez une note fictive</span>
+                                    </li>
+
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-graduation-cap"></i></span> <span>Choix du tuteur (option)</span>
+                                    </li>
+
+                                </ul>
+
                             </div>
+
+                            <div class="d-flex justify-content-center mb-1 align-items-center">
+                                <span class="font-size-small mr-3">à partir de</span>
+                                <span class="font-size-xxxlarge font-weight-bolder text-color-blue"> 10,00 € </span>
+                            </div>
+
+                            <div class="d-flex justify-content-center mb-3 text-align-center">
+                                                                    <a href="commander/prix-feedback.html" class="btn btn-order hvr-icon-wobble-horizontal blue mt-2 font-size-xmedium font-weight-bolder"> Commander ma correction <i
+                                                class="fas fa-angle-right hvr-icon ml-1"></i> </a>
+                                                            </div>
+
+                            <a href="#" data-toggle="modal" class="btn btn-grey font-size-normal mb-3 full-rounded" data-target="#modalExempleFeedback"> Voir un exemple de document commenté et noté </a>
+
+                            <div class="modal fade" tabindex="-1" id="modalExempleFeedback" role="dialog">
+                                <div class="modal-dialog modal-lg" role="document">
+
+
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h3 class="font-weight-bolder w-100 mb-0 font-size-large"> Exemple de document commenté et noté </h3>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body text-center">
+
+                                            <div id="exemple" class="mt-0 pb-1 pt-0">
+                                                <iframe class="mt-2 mb-0 iframe-pdf" id="pdfExemple"
+                                                        width="768"
+                                                        frameborder="0"
+                                                        height="900"
+                                                        src="storage/uploads/sub_services/1/Commentaires%20et%20note.pdf#zoom=80">
+                                                </iframe>
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
                         </div>
+
                     </div>
+
+                </div>
+
+                <div class="col-lg-6 mt-3">
+
+                    <div class="card card-shadow">
+
+
+                        <div class="card-body px-xl-5 px-4 d-flex flex-column align-items-center pt-4 card-skill">
+
+                            <img src="imgs/icon-revision.png" class=" pr-0 mt-0 mb-1" alt="">
+
+                            <h5 class="card-title font-size-xlarge mt-3 mb-2 font-weight-bolder text-color-blue text-center"> Reformulation et amélioration </h5>
+
+                            <span class="font-size-xmedium mt-1 mb-1 line-height-medium font-weight-bolder text-center">
+                                Faites réviser votre document par un correcteur qui retravaillera, reformulera et améliorera votre document.
+                            </span>
+
+                            <p class="card-text text-center font-size-normal mt-3">
+                                Mystudies.com vous propose désormais d’obtenir une <b>révision et une ré-écriture complète ou partielle de votre document</b> par l'un de nos correcteurs afin d'obtenir un travail parfait et sans faute.
+                            </p>
+
+                            <div class="text-center mt-0 mb-2 w-100 float-left text-dark line-height-large">
+
+                                <ul class="list-group w-100 float-left list-group-flush">
+
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-pencil-alt"></i></span> <span>Re-lecture et re-formulation des textes</span>
+                                    </li>
+
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-pencil-alt"></i></span> <span>Correction d'orthographe</span>
+                                    </li>
+
+                                    <li class="list-group-item w-100 d-flex justify-content-center align-items-center flex-row"><span class="pr-4"><i class="fal font-size-xxlarge text-blue fa-graduation-cap"></i></span> <span>Choix du tuteur (option)</span>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                            <div class="d-flex justify-content-center mb-1 align-items-center">
+                                <span class="font-size-small mr-3">à partir de</span>
+                                <span class="font-size-xxxlarge font-weight-bolder text-color-blue">14,50 €</span>
+                            </div>
+
+                            <div class="d-flex justify-content-center mb-3 text-align-center">
+                                                                    <a href="commander/prix-revision.html" class="btn hvr-icon-wobble-horizontal btn-order blue mt-2 font-size-xmedium font-weight-bolder">
+                                        Commander ma correction <i class="fas fa-angle-right hvr-icon ml-1"></i> </a>
+                                                            </div>
+                            <a href="#" data-toggle="modal" class="btn btn-grey font-size-normal mb-3 full-rounded" data-target="#modalExempleRevision"> Voir un exemple de document corrigé et amélioré </a>
+
+                            <div class="modal fade" tabindex="-1" id="modalExempleRevision" role="dialog">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h3 class="font-weight-bolder w-100 mb-0 font-size-large"> Exemple de document corrigé et amélioré </h3>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body text-center">
+
+                                            <div id="exemple" class="mt-0 pb-1 pt-0">
+
+                                                <iframe class="mt-2 mb-0 iframe-pdf" id="pdfExemple"
+                                                        width="768"
+                                                        frameborder="0"
+                                                        height="900"
+                                                        src="storage/uploads/sub_services/2/Reformulation%20et%20amelioration.pdf#zoom=80">
+                                                </iframe>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
-        </div>
+
+            <h3 class="font-size-large font-weight-bolder text-center mt-4 pt-2 mb-1"> Comment ça fonctionne ? </h3>
+            <div class="row">
+                <div class="col-lg-12 pl-4 pt-1">
+                    <p class="mt-3">
+                        <p>Avec MyStudies.com, nous vous offrons la possibilité de faire corriger vos documents scolaires, universitaires ou professionnels. Vous pouvez solliciter nos tuteurs hautement qualifiés pour la correction de votre document, ou simplement d'une partie du document. Notre service est disponible du Collège au Doctorat et dans plus de 80 matières.&nbsp;</p><p>Vous avez la possibilité de choisir le service adapté à vos besoins : <b>Commentaires et Note</b> ou <b>Reformulation et Amélioration.</b></p>
+                    </p>
+                </div>
+            </div>
+
+            <div id="opinions" class="mt-0 pb-1 pt-2">
+                <h3 class="font-size-large font-weight-bolder text-center mt-3 mb-1"> Nos témoignages </h3>
+                <ul class="nav nav-tabs mt-4 justify-content-center" id="tabOpinions" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link font-size-medium font-weight-bold d-flex align-items-center active" id="facebook-opinions-nav" data-toggle="tab" href="#facebook-opinions" role="tab" aria-controls="home" aria-selected="true"><i
+                                    class="fab text-color-facebook fa-facebook-square mr-2"></i> Avis Facebook</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link font-size-medium font-weight-bold d-flex align-items-center" id="trustpilot-opinions-nav" data-toggle="tab" href="#trustpilot-opinions" role="tab" aria-controls="profile"
+                           aria-selected="false">  <img src="imgs/trustpilot_logo.png" style="" class="mr-1" alt="avis MyStudies"> Avis Trustpilot</a>
+                    </li>
+
+                </ul>
+                <div class="tab-content" id="tabOpinionsContent">
+                    <div class="tab-pane fade show active" id="facebook-opinions" role="tabpanel" aria-labelledby="facebook-opinions">
+    <div id="carouselExampleIndicators" data-interval="10000" class="carousel slide">
+        <div class="carousel-inner d-flex mt-3">
+
+                            <div class="carousel-item  text-center  active ">
+                    <div class="d-flex mt-3 align-items-center justify-content-center">
+                        <div class="px-3 d-none d-sm-block"> <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fdiane.belle.399%2Fposts%2F10157418900574658&amp;width=500" width="500" height="218" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> </div>
+                        <div class="px-3 d-block d-sm-none"> <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fdiane.belle.399%2Fposts%2F10157418900574658&amp;width=360" width="360" height="218" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> </div>
+                    </div>
+                </div>
+                            <div class="carousel-item  text-center ">
+                    <div class="d-flex mt-3 align-items-center justify-content-center">
+                        <div class="px-3 d-none d-sm-block"> <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fguillaume.rival%2Fposts%2F10216343280167628&amp;width=500" width="500" height="218" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> </div>
+                        <div class="px-3 d-block d-sm-none"> <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fguillaume.rival%2Fposts%2F10216343280167628&amp;width=360" width="360" height="218" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> </div>
+                    </div>
+                </div>
+                            <div class="carousel-item  text-center ">
+                    <div class="d-flex mt-3 align-items-center justify-content-center">
+                        <div class="px-3 d-none d-sm-block"> <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Floan.plisson.5%2Fposts%2F1064301690443688&amp;width=500" width="500" height="274" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> </div>
+                        <div class="px-3 d-block d-sm-none"> <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Floan.plisson.5%2Fposts%2F1064301690443688&amp;width=360" width="360" height="274" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe> </div>
+                    </div>
+                </div>
+                    </div>
+        <ol class="carousel-indicators mb-0 pt-0 mt-3">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0"  class="active" ></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1" ></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2" ></li>
+                    </ol>
     </div>
+</div>                    <div class="tab-pane fade" id="trustpilot-opinions" role="tabpanel" aria-labelledby="trustpilot-opinions">
+                        <div class="trustpilot-widget mt-4 pt-3" data-locale="fr-FR" data-template-id="53aa8912dec7e10d38f59f36" data-businessunit-id="5c51cde8fb592e00014d1058" data-style-height="130px" data-style-width="100%"
+                             data-theme="light" data-tags="corrections" data-schema-type="Organization"><a href="https://fr.trustpilot.com/review/mystudies.com" target="_blank">Avis de nos étudiants Mystudies sur Trustpilot</a></div>
+                    </div>
+                </div>
+            </div>
 
+        </div>
 
-    <script defer src='../www.google.com/recaptcha/api.js'></script>
+    </div>
 
 <div class="container-fluid newsletter-register pt-4 mt-4 pb-4">
 
@@ -444,6 +541,7 @@
 
             <div class="col-12 mt-sm-0 mt-3 col-sm-3">
 
+              
                 <div class="d-flex flex-grow-1 justify-content-center justify-content-sm-start">
 
                     <a href="#" data-toggle="modal" data-target="#modalEmailNewsletter" class=""> <img src="imgs/icon-mail-nl.png" style="margin-top:-1px;" class="" alt=""> </a>
